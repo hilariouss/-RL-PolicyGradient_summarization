@@ -34,3 +34,6 @@ Richard S. Sutton 교수님의 policy gradient 논문 : http://papers.nips.cc/pa
 # 3-13. ACKTR (Actor-Critic using Kronecker-factored Trust Region)
 # 3-14. SAC (Soft Actor-Critic)
 # 3-15. TD3 (Twin Delayed Deep Deterministic)
+
+# References
+
