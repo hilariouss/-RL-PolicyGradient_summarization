@@ -12,3 +12,25 @@
 강화학습에 대한 기본적인 사항이 숙지가 필요하다면 https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html#key-concepts 링크를 먼저 참고하시면 좋습니다.
 
 Richard S. Sutton 교수님의 policy gradient 논문 : http://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinforcement-learning-with-function-approximation.pdf
+
+# 1. Preliminary of policy gradient
+
+# 2. Proof of policy gradient
+
+# 3. Policy gradient 알고리즘
+# 3-1. REINFORCE (xxxx)
+# 3-2. Actor-critic (Vanilla policy gradient, xxxx)
+# 3-3. Off-policy policy gradient (xxxx)
+
+# 3-4. A2C (Advantage Actor-Critic)
+# 3-5. A3C (Asynchronous Advantage Actor-Critic)
+# 3-6, DPG (Deterministic Policy Gradient)
+# 3-7. DDPG (Deep Deterministic Policy Gradient)
+# 3-8. D4PG (Distributed Distributional DDPG)
+# 3-9. MADDPG (Multi-agent DDPG)
+# 3-10. TRPO (Trust Region Policy Optimization)
+# 3-11. PPO (Proximal policy optimization)
+# 3-12. ACER (Actor-Critic with Experience Replay)
+# 3-13. ACKTR (Actor-Critic using Kronecker-factored Trust Region)
+# 3-14. SAC (Soft Actor-Critic)
+# 3-15. TD3 (Twin Delayed Deep Deterministic)
