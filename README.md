@@ -6,8 +6,8 @@
 저의 논문 작성과 연구를 위한 작은 저장소가 많은 사람들에게 도움이 되었으면 합니다 :)
 
 # 0. Value-based RL vs. Policy-based RL
-고전적 강화학습 알고리즘들은 어떤 상태에서 취할 수 있는 행동별 가치를 나타내는 action-value function인 Q-function을 approximate/estimate하고, 해당 Q-function을 활용해 특정 상태, 행동 pair에 대한 값들을 계산/비교함으로써 ε-greedy 와 같은 방법으로 agent가 최적의 행동을 수행할 수 있도록 하였습니다.
-즉, Q-function이라는 **어떤 상태(s)에서 취할 수 있는 행동(a)별 가치인 Q(s, a)** 를 계산함으로써, agent가 일련의 의사결정(sequential decision making)
+고전적 강화학습 알고리즘들은 **1)어떤 상태에서 취할 수 있는 행동별 가치를 나타내는 action-value function인 Q-function을 approximate/estimate하고, 2)해당 Q-function을 활용해 특정 (상태, 행동) pair에 대한 값들을 계산, ε-greedy와 같은 방법으로 agent가 최적의 행동을 수행할 수 있도록 하였습니다.** 이러한 방법은 value-based 강화학습 이라고 할 수 있습니다.
+즉, value-bawed RL은 **Q(s, a)의 value** 를 계산, 비교함으로써, agent가 일련의 의사결정(sequential decision making)을 수행할 수 있도록 하는 것을 기본 아이디어로 삼으며, 이를 위해 최적의 Q-function을 Bellman equation과 같은 방식으로 구하는 것을 목적으로 합니다.
 
 강화학습에 대한 기본적인 사항이 숙지가 필요하다면 https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html#key-concepts 링크를 먼저 참고하시면 좋습니다.
 
@@ -18,22 +18,22 @@ Richard S. Sutton 교수님의 policy gradient 논문 : http://papers.nips.cc/pa
 # 2. Proof of policy gradient
 
 # 3. Policy gradient 알고리즘
-# 3-1. REINFORCE (xxxx)
-# 3-2. Actor-critic (Vanilla policy gradient, xxxx)
-# 3-3. Off-policy policy gradient (xxxx)
+## 3-1. REINFORCE (xxxx)
+## 3-2. Actor-critic (Vanilla policy gradient, xxxx)
+## 3-3. Off-policy policy gradient (xxxx)
 
-# 3-4. A2C (Advantage Actor-Critic)
-# 3-5. A3C (Asynchronous Advantage Actor-Critic)
-# 3-6, DPG (Deterministic Policy Gradient)
-# 3-7. DDPG (Deep Deterministic Policy Gradient)
-# 3-8. D4PG (Distributed Distributional DDPG)
-# 3-9. MADDPG (Multi-agent DDPG)
-# 3-10. TRPO (Trust Region Policy Optimization)
-# 3-11. PPO (Proximal policy optimization)
-# 3-12. ACER (Actor-Critic with Experience Replay)
-# 3-13. ACKTR (Actor-Critic using Kronecker-factored Trust Region)
-# 3-14. SAC (Soft Actor-Critic)
-# 3-15. TD3 (Twin Delayed Deep Deterministic)
+## 3-4. A2C (Advantage Actor-Critic)
+## 3-5. A3C (Asynchronous Advantage Actor-Critic)
+## 3-6, DPG (Deterministic Policy Gradient)
+## 3-7. DDPG (Deep Deterministic Policy Gradient)
+## 3-8. D4PG (Distributed Distributional DDPG)
+## 3-9. MADDPG (Multi-agent DDPG)
+## 3-10. TRPO (Trust Region Policy Optimization)
+## 3-11. PPO (Proximal policy optimization)
+## 3-12. ACER (Actor-Critic with Experience Replay)
+## 3-13. ACKTR (Actor-Critic using Kronecker-factored Trust Region)
+## 3-14. SAC (Soft Actor-Critic)
+## 3-15. TD3 (Twin Delayed Deep Deterministic)
 
 # References
 
