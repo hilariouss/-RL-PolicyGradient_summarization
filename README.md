@@ -7,13 +7,13 @@
 
 # 0. Value-based RL vs. Policy-based RL
 고전적 강화학습 알고리즘들은 **1)어떤 상태에서 취할 수 있는 행동별 가치를 나타내는 action-value function인 Q-function을 approximate/estimate하고, 2)해당 Q-function을 활용해 특정 (상태, 행동) pair에 대한 값들을 계산, ε-greedy와 같은 방법으로 agent가 최적의 행동을 수행할 수 있도록 하였습니다.** 이러한 방법은 value-based 강화학습 이라고 할 수 있습니다.
-즉, value-bawed RL은 **Q(s, a)의 value** 를 계산, 비교함으로써, agent가 일련의 의사결정(sequential decision making)을 수행할 수 있도록 하는 것을 기본 아이디어로 삼으며, 이를 위해 최적의 Q-function을 Bellman equation과 같은 방식으로 계산합니다.
+즉, value-bawed RL은 **Q(s, a)의 value** 를 계산, 비교함으로써, agent가 일련의 의사결정(sequential decision making)을 수행할 수 있도록 하는 것을 기본 아이디어로 삼으며, 이를 위해 최적의 Q-function을 계산하기 위해 Bellman optimality equation 을 활용하여 계산합니다.
 
-강화학습에 대한 기본적인 사항이 숙지가 필요하다면 https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html#key-concepts 링크를 먼저 참고하시면 좋습니다.
-
-Richard S. Sutton 교수님의 policy gradient 논문 : http://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinforcement-learning-with-function-approximation.pdf
+본격적으로 정책경사에 대한 설명을 시작하기 앞서, 강화학습에 대한 기본적인 사항이 숙지가 필요하다면 https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html#key-concepts 링크를 먼저 참고하시면 좋습니다.
 
 # 1. Preliminary of policy gradient
+Policy gradient는 강화학습 문제들을 푸는 방법입니다. Policy gradient는 policy로 표현되는 목적함수에 대한 gradient를 계산하고, 이를 활용해 expected future return을 최대화 하도록 policy를 조절하는 방법입니다. Policy gradient에 대한 증명 및 자세한 사항은 Richard S. Sutton 교수님의 policy gradient 논문 > http://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinforcement-learning-with-function-approximation.pdf 을 참고하시길 바랍니다.
+
 
 # 2. Proof of policy gradient
 
