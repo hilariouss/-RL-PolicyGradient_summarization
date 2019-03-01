@@ -31,7 +31,6 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
 
 </center>
 
-
 # 2. Proof of policy gradient
 
 # 3. Policy gradient 알고리즘
@@ -55,22 +54,22 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
 # References
 
 *Todo (0/17)*
-- [x] 1. Preliminary of policy gradient
-- [x] 2. Proof of policy gradient
-- [x] 3. Policy gradient algorithm
-  - [x] 3-1. REINFORCE
-  - [x] 3-2. Vanilla policy gradient
-  - [x] 3-3. Off-policy policy gradient
-  - [x] 3-4. A2C
-  - [x] 3-5. A3C
-  - [x] 3-6. DPG
-  - [x] 3-7. DDPG
-  - [x] 3-8. D4PG
-  - [x] 3-9. MADDPG
-  - [x] 3-10. TRPO
-  - [x] 3-11. PPO
-  - [x] 3-12. ACER
-  - [x] 3-13. ACKTR
-  - [x] 3-14. SAC
-  - [x] 3-15. TD3
+- [] 1. Preliminary of policy gradient
+- [] 2. Proof of policy gradient
+- [] 3. Policy gradient algorithm
+  - [] 3-1. REINFORCE
+  - [] 3-2. Vanilla policy gradient
+  - [] 3-3. Off-policy policy gradient
+  - [] 3-4. A2C
+  - [] 3-5. A3C
+  - [] 3-6. DPG
+  - [] 3-7. DDPG
+  - [] 3-8. D4PG
+  - [] 3-9. MADDPG
+  - [] 3-10. TRPO
+  - [] 3-11. PPO
+  - [] 3-12. ACER
+  - [] 3-13. ACKTR
+  - [] 3-14. SAC
+  - [] 3-15. TD3
 
