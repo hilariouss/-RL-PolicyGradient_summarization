@@ -16,20 +16,31 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
 
 <center>
   
-          |  Symbol | Description |
-          |:-------:|:-----------:| 
-          | s ∈ *S* | s: 상태, *S*: 상태 집합 |
-          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
-          | r ∈ *R* | r: 보상, *R*: 보상 집합 |
-          |  ∈ *A* | a: 행동, *A*: 행동 집합 |
-          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
-          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
-          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
-          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
-          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
-          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
+|  Symbol | Description |
+|:-------:|:-----------:| 
+| s ∈ *S* | s: 상태, *S*: 상태 집합 |
+| a ∈ *A* | a: 행동, *A*: 행동 집합 |
+| r ∈ *R* | r: 보상, *R*: 보상 집합 |
+|  ∈ *A* | a: 행동, *A*: 행동 집합 |
+| a ∈ *A* | a: 행동, *A*: 행동 집합 |
+| a ∈ *A* | a: 행동, *A*: 행동 집합 |
+| a ∈ *A* | a: 행동, *A*: 행동 집합 |
+| a ∈ *A* | a: 행동, *A*: 행동 집합 |
+| a ∈ *A* | a: 행동, *A*: 행동 집합 |
+| a ∈ *A* | a: 행동, *A*: 행동 집합 |
 
 </center>
+
+{| class="wikitable" style="margin: auto;"
+| Orange
+| Apple
+|-
+| Bread
+| Pie
+|-
+| Butter
+| Ice cream 
+|}
 
 # 2. Proof of policy gradient
 
