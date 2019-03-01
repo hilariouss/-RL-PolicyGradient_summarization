@@ -16,18 +16,18 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
 
 <center>
   
-|  Symbol | Description |
-|:-------:|:-----------:| 
-| s ∈ *S* | s: 상태, *S*: 상태 집합 |
-| a ∈ *A* | a: 행동, *A*: 행동 집합 |
-| r ∈ *R* | r: 보상, *R*: 보상 집합 |
-|  ∈ *A* | a: 행동, *A*: 행동 집합 |
-| a ∈ *A* | a: 행동, *A*: 행동 집합 |
-| a ∈ *A* | a: 행동, *A*: 행동 집합 |
-| a ∈ *A* | a: 행동, *A*: 행동 집합 |
-| a ∈ *A* | a: 행동, *A*: 행동 집합 |
-| a ∈ *A* | a: 행동, *A*: 행동 집합 |
-| a ∈ *A* | a: 행동, *A*: 행동 집합 |
+          |  Symbol | Description |
+          |:-------:|:-----------:| 
+          | s ∈ *S* | s: 상태, *S*: 상태 집합 |
+          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
+          | r ∈ *R* | r: 보상, *R*: 보상 집합 |
+          |  ∈ *A* | a: 행동, *A*: 행동 집합 |
+          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
+          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
+          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
+          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
+          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
+          | a ∈ *A* | a: 행동, *A*: 행동 집합 |
 
 </center>
 
@@ -54,22 +54,22 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
 # References
 
 *Todo (0/17)*
-- [] 1. Preliminary of policy gradient
-- [] 2. Proof of policy gradient
-- [] 3. Policy gradient algorithm
-  - [] 3-1. REINFORCE
-  - [] 3-2. Vanilla policy gradient
-  - [] 3-3. Off-policy policy gradient
-  - [] 3-4. A2C
-  - [] 3-5. A3C
-  - [] 3-6. DPG
-  - [] 3-7. DDPG
-  - [] 3-8. D4PG
-  - [] 3-9. MADDPG
-  - [] 3-10. TRPO
-  - [] 3-11. PPO
-  - [] 3-12. ACER
-  - [] 3-13. ACKTR
-  - [] 3-14. SAC
-  - [] 3-15. TD3
+- [ ] 1. Preliminary of policy gradient
+- [ ] 2. Proof of policy gradient
+- [ ] 3. Policy gradient algorithm
+  - [ ] 3-1. REINFORCE
+  - [ ] 3-2. Vanilla policy gradient
+  - [ ] 3-3. Off-policy policy gradient
+  - [ ] 3-4. A2C
+  - [ ] 3-5. A3C
+  - [ ] 3-6. DPG
+  - [ ] 3-7. DDPG
+  - [ ] 3-8. D4PG
+  - [ ] 3-9. MADDPG
+  - [ ] 3-10. TRPO
+  - [ ] 3-11. PPO
+  - [ ] 3-12. ACER
+  - [ ] 3-13. ACKTR
+  - [ ] 3-14. SAC
+  - [ ] 3-15. TD3
 
