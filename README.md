@@ -29,8 +29,6 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
  a ∈ *A* | a: 행동, *A*: 행동 집합 
  a ∈ *A* | a: 행동, *A*: 행동 집합 
 
-</center>
-
 # 2. Proof of policy gradient
 
 # 3. Policy gradient 알고리즘
