@@ -14,8 +14,9 @@
 # 1. Preliminary of policy gradient
 Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gradient는 policy로 표현되는 목적함수에 대한 gradient를 계산하고, 이를 활용해 expected future return을 최대화 하도록 policy를 조절하는 방법입니다.** Policy gradient에 대한 증명 및 자세한 사항은 Richard S. Sutton 교수님의 policy gradient 논문 > http://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinforcement-learning-with-function-approximation.pdf 을 참고하시길 바랍니다. 본격적으로 policy gradient를 설명하기에 앞서, 앞으로 사용할 notation에 대한 정리를 하도록 하겠습니다.
 
+<center>
 |  Symbol | Description |
-----------|------------- 
+|:----------:|:-------------:| 
 | s ∈ *S* | s: 상태, *S*: 상태 집합 |
 | a ∈ *A* | a: 행동, *A*: 행동 집합 |
 | r ∈ *R* | r: 보상, *R*: 보상 집합 |
@@ -26,7 +27,7 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
 | a ∈ *A* | a: 행동, *A*: 행동 집합 |
 | a ∈ *A* | a: 행동, *A*: 행동 집합 |
 | a ∈ *A* | a: 행동, *A*: 행동 집합 |
-
+<\center>
 
 
 # 2. Proof of policy gradient
