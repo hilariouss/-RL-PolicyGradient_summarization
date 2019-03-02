@@ -75,9 +75,10 @@ agent가 도달했을 때, 미래 가치에 대한 기댓값이 가장 높은 �
 
 # References
 
-*Todo (0/17)*
-- [ ] 1. Preliminary of policy gradient
-- [ ] 2. Proof of policy gradient
+*Todo (2/18)*
+- [x] 0. Preliminary
+- [x] 1. Value-based reinforcement learning
+- [ ] 2. Introduction and goal of *Policy gradient*
 - [ ] 3. Policy gradient algorithm
   - [ ] 3-1. REINFORCE
   - [ ] 3-2. Vanilla policy gradient
@@ -94,4 +95,3 @@ agent가 도달했을 때, 미래 가치에 대한 기댓값이 가장 높은 �
   - [ ] 3-13. ACKTR
   - [ ] 3-14. SAC
   - [ ] 3-15. TD3
-
