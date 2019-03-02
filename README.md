@@ -6,7 +6,7 @@
 
 본격적으로 정책경사에 대한 설명을 시작하기 앞서, 강화학습에 대한 기본적인 사항이 숙지가 필요하다면 https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html#key-concepts 링크를 먼저 참고하시면 좋습니다.
 저의 논문 작성과 연구를 위한 이 작은 저장소가 많은 사람들에게 도움이 되었으면 합니다 :)
-
+[여기](http://github.com)
 <hr>
 
 # 0. Value-based reinforcement learning
