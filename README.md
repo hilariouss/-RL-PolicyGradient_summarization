@@ -25,7 +25,7 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
 | *P* (*s*<sup>'</sup>, *r* \| *s*, *a*) | 상태 전이 확률(state transition probability).|
 | π<sub>θ</sub> (*a*\|*s*) | Stochastic policy. 정책 π를 기준으로 *s*일 때 *a*를 행할 확률. π는 policy parameter θ로 표현됩니다.|
 | µ (*s*) | Deterministic policy. π와 명시적으로 구별하기 위한 다른 표기를 사용합니다.|
-| V (*s*) | State-value function. Agent의 상태에 대한 미래 가치를 나타냅니다. |
+| V (*s*) | State-value function. Agent의 상태에 대한 미래 가치를 나타냅니다. 특정 정책을 따르는 것에 구애받지 않고 가치 기반 강화학습을 할 경우 활용하며, ω로 parameterized될 경우 V<sub>ω</sub> (*s*)와 같이 표기될 수 있습니다. ϵ-greedy와 같은 학습 방법을 예로 들 수 있습니다. |
 | V (*s*) | State-value function. Agent의 상태에 대한 미래 가치를 나타냅니다. |
 | V (*s*) | State-value function. Agent의 상태에 대한 미래 가치를 나타냅니다. |
 | V (*s*) | State-value function. Agent의 상태에 대한 미래 가치를 나타냅니다. |
