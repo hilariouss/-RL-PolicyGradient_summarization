@@ -19,9 +19,9 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
  s ∈ *S* | Agent의 상태.
  a ∈ *A* | Agent의 행동.
  r ∈ *R* | Environment로부터의 보상.
- s<sub>t</sub>, a~t~ , r~t~ | 어떤 trajectory 에서 time step *t* 일 때의 상태, 행동, 보상.
- γ | 현재 대비 미래 보상값에 대한 페널티, 감쇠상수. 0 < γ ≤ 1
- a ∈ *A* | a: 행동, *A*: 행동 집합 
+ s<sub>t</sub>, a<sub>t</sub> , r<sub>t</sub> | 어떤 trajectory 에서 time step *t* 일 때 agent의 상태, 행동, 보상.
+ γ | 현재 보상 대비 미래 기대보상에 대한 페널티, 감쇠상수. 0 < γ ≤ 1
+ G<sub>t</sub> | 반환값, 또는 누적 기대 보상값. G<sub>t</sub> = $$\sum<sup>\inf</sup><sub>*k*=0</sub>γ<sup>*k*</sup>*R*<sub>*t+k+1*</sub>$$
  a ∈ *A* | a: 행동, *A*: 행동 집합 
  a ∈ *A* | a: 행동, *A*: 행동 집합 
  a ∈ *A* | a: 행동, *A*: 행동 집합 
