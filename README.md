@@ -5,9 +5,9 @@
 2. 또한 본 저장소는 **policy gradient**에 대한 전반적인 내용을 정리함과 더불어, 다양한 **policy gradient 기반의 심층 강화학습 알고리즘들을 직접 구현하고, 해당 소스코드를 공유하는 것을 목적으로 만들어졌습니다.**
 저의 논문 작성과 연구를 위한 작은 저장소가 많은 사람들에게 도움이 되었으면 합니다 :)
 
-# 0. Value-based RL vs. Policy-based RL
+# Preliminary. Value-based RL vs. Policy-based RL
 고전적 강화학습 알고리즘들은 **1)어떤 상태에서 취할 수 있는 행동별 가치를 나타내는 action-value function인 Q-function을 approximate/estimate하고, 2)해당 Q-function을 활용해 특정 (상태, 행동) pair에 대한 값들을 계산, *ε*-greedy와 같은 방법으로 agent가 최적의 행동을 수행할 수 있도록 하였습니다.** 이러한 방법은 value-based 강화학습 이라고 할 수 있습니다.
-즉, value-bawed RL은 **Q(s, a)의 value** 를 계산, 비교함으로써, agent가 일련의 의사결정(sequential decision making)을 수행할 수 있도록 하는 것을 기본 아이디어로 삼으며, 이를 위해 최적의 Q-function을 계산하기 위해 Bellman optimality equation 을 활용하여 계산합니다.
+즉, value-bawed RL은 **Q(s, a)의 value** 를 계산, 비교함으로써, agent가 일련의 의사결정(sequential decision making)을 수행할 수 있도록 하는 것을 기본 아이디어로 삼습니다. 이를 위해서 최적의 Q-function을 계산하고, 그 과정에서 Bellman optimality equation 을 활용합니다.
 
 본격적으로 정책경사에 대한 설명을 시작하기 앞서, 강화학습에 대한 기본적인 사항이 숙지가 필요하다면 https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html#key-concepts 링크를 먼저 참고하시면 좋습니다.
 
