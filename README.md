@@ -16,20 +16,20 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
 
 |  Symbol | Description |
 |:-------:|:-----------: |
-| *s* ∈ *S* | Agent의 상태.|
-| *a* ∈ *A* | Agent의 행동.|
-| *r* ∈ *R* | Environment로부터의 보상.|
+| *s* ∈ *S* | Agent의 **상태**.|
+| *a* ∈ *A* | Agent의 **행동**.|
+| *r* ∈ *R* | Environment로부터의 **보상**.|
 | *s*<sub>*t*</sub>, *a*<sub>*t*</sub> , *r*<sub>*t*</sub> | 어떤 trajectory 에서 time step *t* 일 때 agent의 상태, 행동, 보상.|
-| *γ* | 현재 보상 대비 미래 기대보상에 대한 페널티, 감쇠상수. (0 < *γ* ≤ 1)| 
-| *G*<sub>*t*</sub> | Return. Agent 의 학습척도입니다. ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/G_10.png) (*return은 누적 기대 보상값과 동일*합니다.) |
+| *γ* | 현재 보상 대비 미래 보상에 대한 페널티, 또는 감쇠상수. (0 < *γ* ≤ 1)| 
+| *G*<sub>*t*</sub> | Return. Agent 의 학습척도. ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/G_10.png) (**return은 누적 기대 보상값과 동일**합니다.) |
 | *P* (*s*<sup>'</sup>,*r*\|*s*,*a*) | 상태 전이 확률(state transition probability).|
 | π<sub>θ</sub> (*a*\|*s*) | Stochastic policy. 정책 π를 기준으로 *s*일 때 *a*를 행할 확률. π는 policy parameter θ로 표현됩니다.|
-| µ(*s*) | Deterministic policy. π와 명시적으로 구별하기 위한 다른 표기를 사용합니다.|
-| *V*(*s*) | State-value function. Agent의 상태에 대한 미래 가치를 나타냅니다. 특정 정책을 따르는 것에 구애받지 않고 가치 기반 강화학습을 할 경우 활용하며, *V*(*s*)가 ω로 parameterized될 경우 V<sub>ω</sub> (*s*)와 같이 표기될 수 있습니다. *ϵ*-greedy와 같은 학습 방법을 예로 들 수 있습니다. |
-| *V*<sup>*π*</sup>(*s*) | Policy π를 따르는 가치함수 *V*<sup>*π*</sup>(.)로 상태 *s*의 (expected) return을 나타냅니다. |
-| *Q*(*s*, *a*) | *V*(*s*)가 **상태**의 가치를 나타냈다면, *Q*(*s*, *a*)는 행동별 return을 나타냅니다. |
-| *V*(*s*) | State-value function. Agent의 상태에 대한 미래 가치를 나타냅니다. |
-| *V*(*s*) | State-value function. Agent의 상태에 대한 미래 가치를 나타냅니다. |
+| µ(*s*) | Deterministic policy. π와 명시적으로 구별하기 위한 다른 표기를 사용합니다. |
+| *V*(*s*) | State-value function. Agent의 상태에 대한 미래 가치를 나타냅니다. 특정 정책을 따르는 것에 구애받지 않고 가치 기반 강화학습을 할 경우 활용하며, *V*(*s*)가 ω로 parameterized될 경우 V<sub>ω</sub> (*s*)와 같이 표기될 수 있습니다. *ϵ*-greedy와 같은 학습 방법을 사용 예로 들 수 있습니다. |
+| *V*<sup>*π*</sup>(*s*) | Policy π를 따르는 가치함수 *V*<sup>*π*</sup>(.)로 상태 *s*의 (expected) return을 나타냅니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/V_pi.png) |
+| *Q*(*s*, *a*) | Action-value function. *V*(*s*)가 **상태**의 가치를 나타냈다면, *Q*(*s*, *a*)는 행동별 return을 나타냅니다. 역시 ω로 parameterized될 경우 Q<sub>ω</sub> (*s*, *a*)와 같이 표기될 수 있습니다. |
+| *Q*<sup>π</sup>(*s*, *a*) | *V*<sup>*π*</sup>(*s*)와 유사하게 **상태와 행동 pair (*s*,*a*)** 에 대해 policy π를 따르는 action-value function (Q-function)의 값(return)을 나타냅니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/Q_pi.png) |
+| *A*(*s*, *a*) | Advantage function. *A*(*s*, *a*) = *Q*(*s*, *a*) - *V*(*s*). *V*(*s*)를 baseline으로 하여, 상태 *s*에서 취할 수 있는 행동 *a*별 우수성을 나타내는데 사용하는 함수입니다. |
 
 # 2. Proof of policy gradient
 
