@@ -2,14 +2,17 @@
 1. 이 저장소는 **강화학습(RL, Reinforcement learning)** 의 학습 방법 중 하나인 **정책 경사(***policy gradient***)** 에 대한 방법론을 정리합니다.
 원문은 다음 링크 >https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html 을 참고하였음을 밝힙니다.
 
-2. 또한 본 저장소는 **policy gradient**에 대한 전반적인 내용을 정리함과 더불어, 다양한 **policy gradient 기반의 심층 강화학습 알고리즘들을 직접 구현하고, 해당 소스코드를 공유하는 것을 목적으로 만들어졌습니다.**
-저의 논문 작성과 연구를 위한 작은 저장소가 많은 사람들에게 도움이 되었으면 합니다 :)
-
-# Preliminary. Value-based RL vs. Policy-based RL
-고전적 강화학습 알고리즘들은 **1)어떤 상태에서 취할 수 있는 행동별 가치를 나타내는 action-value function인 Q-function을 approximate/estimate하고, 2)해당 Q-function을 활용해 특정 (상태, 행동) pair에 대한 값들을 계산, *ε*-greedy와 같은 방법으로 agent가 최적의 행동을 수행할 수 있도록 하였습니다.** 이러한 방법은 value-based 학습 이라고 할 수 있습니다.
-즉, value-based 은 **Q(s, a)의 value** 를 계산, 비교함으로써, agent가 일련의 의사결정(sequential decision making)을 수행할 수 있도록 하는 것을 기본 아이디어로 삼습니다. 이를 위해서 최적의 Q-function을 계산하고, 그 과정에서 Bellman optimality equation 을 활용합니다.
+2. 또한 본 저장소는 **policy gradient**에 대한 전반적인 내용을 정리함과 더불어, 다양한 **policy gradient 기반의 심층 강화학습 알고리즘들을 직접 구현하고, 해당 소스코드를 공유하는 것을 목적으로 만들어졌습니다.** 
 
 본격적으로 정책경사에 대한 설명을 시작하기 앞서, 강화학습에 대한 기본적인 사항이 숙지가 필요하다면 https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html#key-concepts 링크를 먼저 참고하시면 좋습니다.
+저의 논문 작성과 연구를 위한 이 작은 저장소가 많은 사람들에게 도움이 되었으면 합니다 :)
+<hr/>
+
+# Preliminary. Classical value-based approach of Reinforcement learning
+고전적 강화학습 알고리즘들은 
+**1)어떤 상태에서 취할 수 있는 행동별 가치를 나타내는 action-value function인 Q-function을 approximate/estimate하고, 
+2)해당 Q-function을 활용해 (상태, 행동) pair에 대한 Q 값들을 계산, *ε*-greedy와 같은 방법으로 agent가 최적의 행동을 하도록 하였습니다.** 
+이러한 방법은 value-based 학습 이라고 할 수 있습니다. 이러한 Q 함수의 
 
 # 1. Preliminary of policy gradient
 Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gradient는 policy로 표현되는 목적함수(보상함수)에 대한 gradient를 계산하고, 이를 활용해 expected future return을 최대화 하도록 policy를 조절하는 방법입니다.** Policy gradient에 대한 증명 및 자세한 사항은 Richard S. Sutton 교수님의 policy gradient 논문 > http://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinforcement-learning-with-function-approximation.pdf 을 참고하시길 바랍니다. 본격적으로 policy gradient를 설명하기에 앞서, 앞으로 사용할 notation에 대한 정리를 하도록 하겠습니다.
@@ -31,7 +34,7 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
 | *Q*<sup>π</sup>(*s*, *a*) | *V*<sup>*π*</sup>(*s*)와 유사하게 **상태와 행동 pair (*s*,*a*)** 에 대해 policy π를 따르는 action-value function (Q-function)의 값(return)을 나타냅니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/Q_pi.png) |
 | *A*(*s*, *a*) | Advantage function. *V*(*s*)를 baseline으로 하여, 상태 *s*에서 취할 수 있는 행동 *a*별 우수성을 나타내는데 사용하는 함수입니다. ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/A_10.png)|
 
-# 2. Proof of policy gradient
+# 2. Introduction and goal of *Policy gradient*  
 
 # 3. Policy gradient 알고리즘
 ## 3-1. REINFORCE (xxxx)
