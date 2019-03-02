@@ -37,9 +37,11 @@ Policy gradient 방식의 강화학습을 살펴보기 앞서, 비교 대상인 
 Value-based reinforcement learning은 **상태와 행동에 대한 미래 가치를 나타내는 value function의 값을 계산하고 이 값을 활용하여 agent가 최적의 행동을 할 수 있도록 설계되었습니다.** 이는 value function이 **상태에 대한 미래 가치를 나타내는 state-value function** 이거나, **상태와 그 상태에서 행할 수 있는 행동들 별 가치인 action value function (Q-function)** 로 양분할 수 있습니다: 
 
 <p style="background-color: #171515">
+  
 **1) state-value function인 경우, 특정 상황의 가치를 iteration 과정을 반복해 모든 상황들에 대해 미래 가치를 업데이트 해나갑니다. 갱신되는 상태별 미래 가치 값에 따라 agent는 *ε*-greedy 방식과 같은 옵션을 선택해 행동할 수 있습니다.**
 
 **2) action-value function인 경우, 특정 상황에서의 각 행동에 대한 미래 가치를 iteration 과정을 반복해 어떤 상황에 agent가 도달했을 때, 미래 가치에 대한 기댓값이 가장 높은 행동을 취하도록 행동할 수 있습니다.**
+
 </p>
 
 하지만, 이러한 상태별, 또는 상태 및 행동별 가치를 도출하기 위한 state-value function 또는 action-value function의 design 및 실 적용을 위한 state/action space의 continuity 및 dimension 문제로 인해 최근 deep neural network를 활용한 연구가 활발히 이루어져 Deep Q-Network(DQN)과 같은 기법이 등장했습니다. 이러한 deep learning 기반의 value-based 강화학습은 가치 함수의 approximation(근사)를 통한 유도에 있다고 할 수 있겠습니다. 정리하면 이러한 value-based 학습 방법은 **최적 가치 함수에 대한 근사 및 Q 값의 비교를 통한 agent의 행동 '유도'에 초점**이 맞추어져 있습니다. 우리가 앞으로 살펴볼 policy gradient 방식의 학습은 Q 함수와 같은 가치함수의 근사과정을 생략하고 직접 **최적 정책에 대한 학습**을 수행한다는 측면에서 구별된다고 할 수 있습니다.
