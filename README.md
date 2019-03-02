@@ -47,10 +47,10 @@ agent가 도달했을 때, 미래 가치에 대한 기댓값이 가장 높은 �
 하지만, 이러한 상태별, 또는 상태 및 행동별 가치를 도출하기 위한 state-value function 또는 action-value function의 design 및 실 적용을 위한 state/action space의 continuity 및 dimension 문제로 인해 최근 deep neural network를 활용한 연구가 활발히 이루어져 Deep Q-Network(DQN)과 같은 기법이 등장했습니다. 이러한 deep learning 기반의 value-based 강화학습은 가치 함수의 approximation(근사)를 통한 유도에 있다고 할 수 있겠습니다. 
 
 
->     정리하면 이러한 value-based 학습 방법은 **최적 가치 함수에 대한 근사 및 Q 값의 비교를 통한 agent의 행동 '유도'에 초점**이 맞추어져 있습니다. 
-
->     우리가 앞으로 살펴볼 policy gradient 방식의 학습은 Q 함수와 같은 가치함수의 근사과정을 생략하고 **직접 최적 정책에 대한 학습을 수행**한다는 측면에서 구별된다고 할 수 있습니다. 이를통해 추가적인 Q 값의 비교 작업 없이도 학습한 최적 정책에 상태를 입력하면 최적의 행동이 어떤 것인지 즉각적인 의사결정이 가능합니다.
-
+```
+정리하면 이러한 value-based 학습 방법은 최적 가치 함수에 대한 근사 및 Q 값의 비교를 통한 agent의 행동 '유도'에 초점이 맞추어져 있습니다. 
+우리가 앞으로 살펴볼 policy gradient 방식의 학습은 Q 함수와 같은 가치함수의 근사과정을 생략하고 직접 최적 정책에 대한 학습을 수행한다는 측면에서 구별된다고 할 수 있습니다. 이를통해 추가적인 Q 값의 비교 작업 없이도 학습한 최적 정책에 상태를 입력하면 최적의 행동이 어떤 것인지 즉각적인 의사결정이 가능합니다.
+```
 <hr>
 
 # 2. Introduction and goal of *Policy gradient*  
