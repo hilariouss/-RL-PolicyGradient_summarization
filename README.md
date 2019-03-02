@@ -29,7 +29,7 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
 | *V*<sup>*π*</sup>(*s*) | Policy π를 따르는 가치함수 *V*<sup>*π*</sup>(.)로 상태 *s*의 (expected) return을 나타냅니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/V_pi.png) |
 | *Q*(*s*, *a*) | Action-value function. *V*(*s*)가 **상태**의 가치를 나타냈다면, *Q*(*s*, *a*)는 행동별 return을 나타냅니다. 역시 ω로 parameterized될 경우 Q<sub>ω</sub> (*s*, *a*)와 같이 표기될 수 있습니다. |
 | *Q*<sup>π</sup>(*s*, *a*) | *V*<sup>*π*</sup>(*s*)와 유사하게 **상태와 행동 pair (*s*,*a*)** 에 대해 policy π를 따르는 action-value function (Q-function)의 값(return)을 나타냅니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/Q_pi.png) |
-| *A*(*s*, *a*) | Advantage function. *A*(*s*, *a*) = *Q*(*s*, *a*) - *V*(*s*). *V*(*s*)를 baseline으로 하여, 상태 *s*에서 취할 수 있는 행동 *a*별 우수성을 나타내는데 사용하는 함수입니다. |
+| *A*(*s*, *a*) | Advantage function. *V*(*s*)를 baseline으로 하여, 상태 *s*에서 취할 수 있는 행동 *a*별 우수성을 나타내는데 사용하는 함수입니다. ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/A_10.png)|
 
 # 2. Proof of policy gradient
 
