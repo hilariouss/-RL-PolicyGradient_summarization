@@ -22,7 +22,8 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
 | s<sub>t</sub>, a<sub>t</sub> , r<sub>t</sub> | 어떤 trajectory 에서 time step *t* 일 때 agent의 상태, 행동, 보상.|
 | γ | 현재 보상 대비 미래 기대보상에 대한 페널티, 감쇠상수. (0 < γ ≤ 1)| 
 | G<sub>t</sub> | 누적 기대 보상값. Agent가 학습하는 척도로, 이를 최대화 하도록 자신의 행동양식(정책)을 최적화합니다. ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/G_10.png)|
-| *P*(*s*<sup>'</sup>, *r* \| *s*, *a*) | Agent가 현재 상태와 선택한 행동이 각각 *s*와 *a*일 때, 다음 agent의 상태가 *s*<sup>'</sup>이고, 보상으로 *r*을 받을 상태 전이 확률(Transition probability).|
+| *P*(*s*<sup>'</sup>, *r* \| *s*, *a*) | 상태 전이 확률(state transition probability). 
+Agent가 현재 상태와 선택한 행동이 각각 *s*와 *a*일 때, 다음 상태가 *s*<sup>'</sup>이고, 보상으로 *r*을 받을 상태 전이 확률.|
 | a ∈ *A* | a: 행동, *A*: 행동 집합 |
 | a ∈ *A* | a: 행동, *A*: 행동 집합 |
 | a ∈ *A* | a: 행동, *A*: 행동 집합 |
