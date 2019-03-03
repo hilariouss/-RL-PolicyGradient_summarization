@@ -63,6 +63,10 @@ agent가 도달했을 때, 미래 가치에 대한 기댓값이 가장 높은 �
 **Stationary distribution ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/d^pi(s).png)은 state 변화의 sequence를 표현하는 finite Markov chain이 있을 때, 충분히 큰 상태전이를 반복하다보면 어떤 상태에 도달하는 확률들이 수렴한다는 확률분포를 말합니다.** Stationary distribution의 매력적인 점은 초기 Markov chain의 상태전이 확률에 영향을 받지 않는다는 점입니다. 왜냐하면 최종적으로 이 stationary distribution이 수렴하는 확률분포에 도달할 것이기 때문입니다. Markov chain의 상태들에 대해 영원히 transition 하면 결국 어떤 terminal state에 도달한다는 확률이 불변한다는 것이라고 생각하면 좀 더 쉽습니다. 즉, 처음 상태가 *s*<sub>0</sub>이고, policy ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/pi_theta.png)를 따를 때, *t* time step이 흘렀을 때의 상태 *s*<sub>t</sub>가 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/s_{t}=s.png)가 될 확률이 곧 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/d^pi(s).png)가 되는 것입니다.
 결국 Stationary distribution을 수식으로 표현하면 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/d^pi_lim.png)가 됩니다.
 
+Policy-based 방식은 continuous space의 state 또는 action space에 대해 학습하는데 더욱 효과적 입니다. Discrete한 state 및 action들에 대한 가치는 value-based 방식에서 사용할 수 있었지만, continuous하여 무한한 state 또는 action space에 대한 문제일 경우 한계가 있습니다. 예를 들어 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/argmax.png)를 계산해 policy를 improve하는 policy iteration의 경우 무한한 action space에 대한 계산이 거의 불가능합니다.
+
+*Gradient ascent* 방식을 사용하여, 우리는 gradient ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/gradient_J.png)에 대해 가장 높은 return을 주는 방향으로 policy를 나타내는 parameter θ를 조절(학습)합니다.
+
 # 3. Policy gradient 알고리즘
 ## 3-1. REINFORCE (xxxx)
 ## 3-2. Actor-critic (Vanilla policy gradient, xxxx)
@@ -70,7 +74,7 @@ agent가 도달했을 때, 미래 가치에 대한 기댓값이 가장 높은 �
 
 ## 3-4. A2C (Advantage Actor-Critic)
 ## 3-5. A3C (Asynchronous Advantage Actor-Critic)
-## 3-6, DPG (Deterministic Policy Gradient)
+## 3-6. DPG (Deterministic Policy Gradient)
 ## 3-7. DDPG (Deep Deterministic Policy Gradient)
 ## 3-8. D4PG (Distributed Distributional DDPG)
 ## 3-9. MADDPG (Multi-agent DDPG)
