@@ -58,9 +58,8 @@ agent가 도달했을 때, 미래 가치에 대한 기댓값이 가장 높은 �
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/J_theta.png)
 
-```
 여기서 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/d^pi(s).png)는 Markov chain의 stationary distribution입니다. 
-```
+
 **Stationary distribution은 state 변화의 sequence를 표현하는 finite Markov chain이 있을 때, 충분히 큰 상태전이를 반복하다보면 각 상태에 도달하는 확률이 수렴되는 확률 분포를 말합니다.** Stationary distribution의 매력적인 점은 초기 Markov chain의 상태전이 확률에 영향을 받지 않는다는 점입니다. 최종적으로 이 stationary distribution이 수렴하는 확률분포에 도달할 것이기 때문입니다.
 
 # 3. Policy gradient 알고리즘
