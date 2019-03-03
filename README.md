@@ -65,7 +65,19 @@ agent가 도달했을 때, 미래 가치에 대한 기댓값이 가장 높은 �
 
 Policy-based 방식은 continuous space의 state 또는 action space에 대해 학습하는데 더욱 효과적 입니다. Discrete한 state 및 action들에 대한 가치는 value-based 방식에서 사용할 수 있었지만, continuous하여 무한한 state 또는 action space에 대한 문제일 경우 한계가 있습니다. 예를 들어 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/argmax.png)를 계산해 policy를 improve하는 policy iteration의 경우 무한한 action space에 대한 계산이 거의 불가능합니다.
 
-*Gradient ascent* 방식을 사용하여, 우리는 gradient ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/gradient_J.png)에 대해 가장 높은 return을 주는 방향으로 policy를 나타내는 parameter θ를 조절(학습)합니다.
+*Gradient ascent* 방식을 사용하여, 우리는 gradient ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/gradient_J.png)에 대해 가장 높은 return을 주는 방향으로 policy를 나타내는 parameter θ를 조절(학습)합니다. Gradient는 아래와 같이 표현됩니다.
+
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/J(theta)_derivation.png)
+이 때, ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/E_pi.png)는 state와 action distribution이 policy ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/pi_theta.png)를 모두 따르는 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/E_sdapi.png)임을 나타냅니다.
+
+결국, (Vanilla) policy gradient는 아래 기댓값으로 표현된 θ에 대한 gradient를 활용합니다. 
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/J(theta)_derivation_2.png)
+
+하지만 vanilla policy gradient는 bias가 없고, variance가 높아 bias는 유지하면서 variance는 줄이려는 다양한 policy gradient 알고리즘들이 제시되었습니다. 결국, Gradient에 대한 다양한 수식들이 존재하고, 이에 대한 일반식이 [Schulman et al., 2016](https://arxiv.org/abs/1506.02438)에 제시되어 있습니다. 해당하는 gradient에 대한 일반식은 아래와 같습니다.
+
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/General_Gradient.png)
+
+정리하면 Policy gradient 기반의 알고리즘들은 이와같은 gradient를 활용해 expected return을 향상시키도록 policy parameter θ를 학습하는 것이라고 할 수 있습니다.
 
 # 3. Policy gradient 알고리즘
 ## 3-1. REINFORCE (xxxx)
