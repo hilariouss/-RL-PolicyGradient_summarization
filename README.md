@@ -73,11 +73,11 @@ Policy-based 방식은 continuous space의 state 또는 action space에 대해 �
 결국, (Vanilla) policy gradient는 아래 기댓값으로 표현된 θ에 대한 gradient를 활용합니다. 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/J(theta)_derivation_2.png)
 
-하지만 vanilla policy gradient는 bias가 없고, variance가 높아 bias는 유지하면서 variance는 줄이려는 다양한 policy gradient 알고리즘들이 제시되었습니다. 결국, Gradient에 대한 다양한 수식들이 존재하고, 이에 대한 일반식이 [Schulman et al., 2016](https://arxiv.org/abs/1506.02438)에 제시되어 있습니다. 해당하는 gradient에 대한 일반식은 아래와 같습니다.
+하지만 vanilla policy gradient는 bias가 없고, variance가 높아 bias는 유지하면서 variance는 줄이려는 다양한 policy gradient 알고리즘들이 제시되었습니다. 결국, Gradient에 대한 다양한 수식들이 존재하고, 이에 대한 일반식이 [Schulman et al., 2016](https://arxiv.org/abs/1506.02438)에 제시되었습니다. 일반화된 gradient에 대한 계산식 GAE(General advantage estimation)은 아래와 같습니다.
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/General_Gradient.png)
 
-정리하면 Policy gradient 기반의 알고리즘들은 이와같은 gradient를 활용해 expected return을 향상시키도록 policy parameter θ를 학습하는 것이라고 할 수 있습니다.
+결국, Policy gradient 기반의 알고리즘들은 위와 같은 gradient를 활용해 expected future return을 maximize시키도록 policy parameter θ를 학습하는 것이라고 할 수 있습니다.
 
 # 3. Policy gradient 알고리즘
 ## 3-1. REINFORCE (xxxx)
