@@ -55,8 +55,9 @@ agent가 도달했을 때, 미래 가치에 대한 기댓값이 가장 높은 �
 
 # 2. Introduction and goal of *Policy gradient* 
 **Policy gradient**는 policy 자체를 직접적으로 modeling하고 optimize하는 방법입니다. Policy는 위 notation과 같이 policy parameter θ로 표현되며, 이는 π<sub>θ</sub> (*a*\|*s*) 라고 했습니다. Policy gradient는 이러한 policy를 포함하는 목적함수를 policy에 대한 parameter θ에 대한 기울기(gradient)를 구하여 목적함수를 최적화 합니다. 이 목적함수는 policy를 포함하는 reward function이 됩니다. 즉, policy를 포함하는 reward 함수를 목적함수로 설정하고, 이에 대한 θ의 gradient를 구해 이 목적함수를 최적화 하여 최대한의 보상을 얻도록 θ를 학습하는 것이 policy gradient라고 할 수 있겠습니다. 그럼 목적 함수(보상함수)를 살펴보겠습니다.
-
+<center>
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/J_theta.png#center)
+</center>
 ```
 여기서 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/d^pi(s).png)는 Markov chain의 stationary distribution입니다. 
 ```
