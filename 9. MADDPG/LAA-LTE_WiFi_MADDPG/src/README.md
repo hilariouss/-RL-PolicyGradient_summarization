@@ -1,4 +1,4 @@
 This folder contains:
-  1. env
-  2. maddpg_agent
-  3. maddpg_main
+  1. env (blind, LAA-LTE/WiFi vehicular network)
+  2. maddpg_agent (contains Actor, critic, agent)
+  3. maddpg_main  (contains learning part of agent)
