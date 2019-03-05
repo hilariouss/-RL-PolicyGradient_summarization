@@ -1,1 +1,1 @@
-This folder contains 'Collaborative medium sharing on vehicular License-assisted-access LTE with WiFi networks' article.
+This folder contains part of source code for paper called 'Collaborative medium sharing on vehicular joint LAA-LTE/WiFi networks with multi-agent deep reinforcement learning approach'.
