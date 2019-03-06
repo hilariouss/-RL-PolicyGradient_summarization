@@ -106,12 +106,12 @@ Policy-based 방식은 continuous space의 state 또는 action space에 대해 �
 
 # References
 
-*Todo (2/18)*
+*Todo (5/19)*
 - [x] 0. Preliminary
 - [x] 1. Value-based reinforcement learning
 - [x] 2. Introduction and goal of *Policy gradient*
-- [ ] 3. Policy gradient algorithm
-  - [ ] 3-1. REINFORCE
+- [x] 3. Policy gradient algorithm
+  - [x] 3-1. REINFORCE
   - [ ] 3-2. Vanilla policy gradient
   - [ ] 3-3. Off-policy policy gradient
   - [ ] 3-4. A2C
