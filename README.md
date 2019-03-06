@@ -81,12 +81,20 @@ Policy-based 방식은 continuous space의 state 또는 action space에 대해 �
 
 # 3. Policy gradient 알고리즘
 ## 3-1. REINFORCE ([논문](https://link.springer.com/content/pdf/10.1007/BF00992696.pdf)|[코드](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/1.%20REINFORCE))
-**Monte-Carlo policy gradient**, 또는 **REINFORCE (R.J. Williams, "Simple statistical gradient-following algorithms for connectionist reinforcement learning," 8(3--4), 1992)**는 episode의 샘플들을 활용해 policy parameter θ를 update합니다. 즉 episode에서 estimate할 수 있는 return 값을 활용해 policy parameter를 update 합니다. REINFORCE는 gradient에 대한 actual 값과 expectation of sample gradient가 동일하기 때문에 동작합니다. 무슨 의미인지 이해가 가지 않을 수 있어 아래 수식을 다시 첨부합니다:
+**Monte-Carlo policy gradient**, 또는 **REINFORCE**(R.J. Williams, "Simple statistical gradient-following algorithms for connectionist reinforcement learning," 8(3--4), 1992)는 episode의 샘플들을 활용해 policy parameter θ를 update합니다. 즉 episode에서 estimate할 수 있는 return 값을 활용해 policy parameter를 update 합니다. REINFORCE는 gradient에 대한 actual 값과 expectation of sample gradient가 동일하기 때문에 동작합니다. 무슨 의미인지 이해가 가지 않을 수 있어 아래 수식을 다시 첨부합니다:
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/REINFORCE.png)
 
 파란색의 박스는 gradient에 대한 actual value (proportional)를 나타내며, 빨간색의 박스는 gradient에 대한 expectation을 나타냅니다. 이 둘의 값이 동일하기 때문에 REINFORCE는 episode의 sample 값에 대한 return을 계산하고 이를 바탕으로 gradient를 update할 수 있습니다.
 
+REINFORCE가 Monte-Carlo policy gradient라고 불리는 이유는 Monte-Carlo 방법으로 full trajectory(episode)를 구하고, 이를 이루는 샘플들을 바탕으로 return을 계산하여 policy update에 활용하기 때문입니다. REINFORCE의 알고리즘은 아래와 같습니다.
+
+**REINFORCE algorithm**
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_gif/REINFORCE_algo.png)
+
+간단하게 알고리즘을 살펴보면 초기 policy parameter를 랜덤하게 초기화하고, 이를 바탕으로 하나의 trajectory를 생성하는 것을 알 수 있습니다. 이후, 생성한 trajectory의 sample들에 대한 return을 계산하고, iterative하게 policy를 gradient ascent방식으로 갱신하는 것을 확인할 수 있습니다.
+
+한편, REINFORCE의 다른 변화한 버전도 존재하는데, 알고리즘의 가장 아래 return으로 표기된 *G*<sub>t</sub>에서 baseline 역할을 하는 state-value function을 뺀 것을 활용하기도 합니다. 이는 gradient estimation의 variance는 감소시키면서 동시에 bias는 유지하기 위함입니다. 즉, Q 함수로 나타나는 return에서 state-value function을 뺀 advantage 함수 A(s, a)가 대체될 수 있습니다.
 
 ## 3-2. Actor-critic (Vanilla policy gradient, xxxx)
 ## 3-3. Off-policy policy gradient (xxxx)
