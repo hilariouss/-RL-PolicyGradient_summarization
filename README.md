@@ -94,7 +94,7 @@ REINFORCE가 Monte-Carlo policy gradient라고 불리는 이유는 Monte-Carlo �
 
 간단하게 알고리즘을 살펴보면 초기 policy parameter를 랜덤하게 초기화하고, 이를 바탕으로 하나의 trajectory를 생성하는 것을 알 수 있습니다. 이후, 생성한 trajectory의 sample들에 대한 return을 계산하고, iterative하게 policy를 gradient ascent방식으로 갱신하는 것을 확인할 수 있습니다.
 
-한편, REINFORCE의 다른 변화한 버전도 존재하는데, 알고리즘의 가장 아래 return으로 표기된 *G*<sub>t</sub>에서 baseline 역할을 하는 state-value function을 뺀 것을 활용하기도 합니다. 이는 gradient estimation의 variance는 감소시키면서 동시에 bias는 유지하기 위함입니다. 즉, Q 함수로 나타나는 return에서 state-value function을 뺀 advantage 함수 A(s, a)가 대체될 수 있습니다.
+한편, REINFORCE의 다른 변화한 버전도 존재하는데, 알고리즘의 가장 아래 return으로 표기된 *G*<sub>t</sub>에서 baseline 역할을 하는 state-value function을 뺀 것을 활용하기도 합니다. 이는 gradient estimation의 variance는 감소시키면서 동시에 bias는 유지하기 위함입니다. 즉, Q 함수로 나타나는 return에서 state-value function을 뺀 advantage 함수 A(s, a)가 *G*<sub>t</sub>를 대체 수 있습니다.
 
 ## 3-2. Actor-critic (Vanilla policy gradient, xxxx)
 ## 3-3. Off-policy policy gradient (xxxx)
