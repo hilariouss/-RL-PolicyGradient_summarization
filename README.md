@@ -80,7 +80,7 @@ Policy-based 방식은 continuous space의 state 또는 action space에 대해 �
 결국, Policy gradient 기반의 알고리즘들은 위와 같은 gradient를 활용해 expected future return을 maximize시키도록 policy parameter θ를 학습하는 것이라고 할 수 있습니다.
 
 # 3. Policy gradient 알고리즘
-## 3-1. REINFORCE ([논문](https://link.springer.com/content/pdf/10.1007/BF00992696.pdf)|[코드](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/1.%20REINFORCE))
+## 3-1. REINFORCE ([논문](https://link.springer.com/content/pdf/10.1007/BF00992696.pdf)|[코드](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/1.%20REINFORCE/REINFORCE_CartPole.py))
 **Monte-Carlo policy gradient**, 또는 **REINFORCE**(R.J. Williams, "Simple statistical gradient-following algorithms for connectionist reinforcement learning," *Machine learning*, vol. 8, pp. 3-4, 1992)는 episode의 샘플들을 활용해 policy parameter θ를 update합니다. 즉 episode에서 estimate할 수 있는 return 값을 활용해 policy parameter를 update 합니다. REINFORCE는 gradient에 대한 actual 값과 expectation of sample gradient가 동일하기 때문에 동작합니다. 무슨 의미인지 이해가 가지 않을 수 있어 아래 수식을 다시 첨부합니다:
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/REINFORCE.png)
@@ -147,13 +147,13 @@ Value function의 update 수식에서 β는 positive step-size parameter로 lear
 
 # References
 
-*Todo (5/19)*
+*Todo (6/19)*
 - [x] 0. Preliminary
 - [x] 1. Value-based reinforcement learning
 - [x] 2. Introduction and goal of *Policy gradient*
 - [x] 3. Policy gradient algorithm
   - [x] 3-1. REINFORCE
-  - [ ] 3-2. Actor-critic
+  - [x] 3-2. Actor-critic
   - [ ] 3-3. Off-policy policy gradient
   - [ ] 3-4. A2C
   - [ ] 3-5. A3C
