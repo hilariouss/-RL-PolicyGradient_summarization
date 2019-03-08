@@ -120,7 +120,7 @@ REINFORCE가 Monte-Carlo policy gradient라고 불리는 이유는 Monte-Carlo �
 - [x] 2. Introduction and goal of *Policy gradient*
 - [x] 3. Policy gradient algorithm
   - [x] 3-1. REINFORCE
-  - [ ] 3-2. Vanilla policy gradient
+  - [ ] 3-2. Actor-critic
   - [ ] 3-3. Off-policy policy gradient
   - [ ] 3-4. A2C
   - [ ] 3-5. A3C
