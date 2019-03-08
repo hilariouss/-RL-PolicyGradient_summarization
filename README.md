@@ -109,11 +109,15 @@ Monte-Carlo 방식과 상반되는 방식으로는 Temporal difference(TD) 방�
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/delta.png)
 
-여기서 *V*함수는 critic의 현재 value function입니다. 이 TD-error는 현재 상태 *s*<sub>t</sub>에서 actor에 의해 선택된 행동 *a*<sub>t</sub>을 평가하는데 사용됩니다. 만약 TD-error의 값이 양수라면 현재 상태의 가치 대비 미래 상태의 가치가 더욱 크다는 의미이므로, 좋은 행동을 했다고 평가할 수 있습니다. 만약 반대의 경우, 이러한 행동을 덜 하도록 (weakened) actor을 업데이트 합니다. 만약 action들이 Gibbs softmax method
+여기서 *V*함수는 critic의 현재 value function입니다. 이 TD-error는 현재 상태 *s*<sub>t</sub>에서 actor에 의해 선택된 행동 *a*<sub>t</sub>을 평가하는데 사용됩니다. 만약 TD-error의 값이 양수라면 현재 상태의 가치 대비 미래 상태의 가치가 더욱 크다는 의미이므로, 좋은 행동을 했다고 평가할 수 있습니다. 만약 반대의 경우, 이러한 행동을 덜 하도록 (weakened) actor을 업데이트 합니다. 
+
+만약 action들이 Gibbs softmax method
  ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor-critic-pi.png)
-로 나타나는 확률분포라고 해봅시다 (*p*(s, a)는 time step *t*에서 상태 *s*<sub>t</sub>=*s*일 때 어떤 행동 a (*a*<sub>t</sub>=*a*)에 대한 확률입니다. 정책이므로 해당 상태에 대해 취할 수 있는 모든 행동들에 대한 확률값이라고 할 수 있습니다.) 이 때, 정책을 이루는 각 행동에 대한 확률값의 학습은 아래와 같은 수식으로 갱신됩니다. 여기서 β는 positive step-size parameter로, 정책의 업데이트의 정도를 조절하는 파라미터로 활용됩니다. 
+로 나타나는 확률분포라고 해봅시다. *p*(*s*, *a*)는 time step *t*에서 상태 *s*<sub>t</sub>=*s*일 때 어떤 행동 *a* (*a*<sub>t</sub>=*a*)에 대한 확률입니다. 이 때, 정책을 이루는 각 행동에 대한 확률값의 학습은 아래와 같은 수식으로 갱신됩니다. 여기서 β는 positive step-size parameter로, 정책의 업데이트의 정도를 조절하는 파라미터로 활용됩니다. 
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor-critic-policyupdate.png)
+
+
 
 ## 3-3. Off-policy policy gradient (xxxx)
 
