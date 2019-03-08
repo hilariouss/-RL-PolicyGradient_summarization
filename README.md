@@ -96,17 +96,23 @@ REINFORCE가 Monte-Carlo policy gradient라고 불리는 이유는 Monte-Carlo �
 
 한편, REINFORCE의 다른 변화한 버전도 존재하는데, 알고리즘의 가장 아래 return으로 표기된 *G*<sub>t</sub>에서 baseline 역할을 하는 state-value function을 뺀 것을 활용하기도 합니다. 이는 gradient estimation의 variance는 감소시키면서 동시에 bias는 유지하기 위함입니다. 즉, Q 함수로 나타나는 return에서 state-value function을 뺀 advantage 함수 A(s, a)가 *G*<sub>t</sub>를 대체 수 있습니다.
 
-## 3-2. Actor-critic ([논문](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/2.%20Actor-critic/Actor-critic%20algorithm.pdf)|[코드](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/2.%20Actor-critic)[참고](https://medium.freecodecamp.org/an-intro-to-advantage-actor-critic-methods-lets-play-sonic-the-hedgehog-86d6240171d))
-이전에 살펴본 REINFORCE의 Monte-Carlo method는 에피소드가 끝날때 까지 기다렸다가 업데이트를 하는 방식을 채택했습니다. Gradient의 업데이트 수식을 살펴보면, 정책으로 도출되는 행동들에 대한 확률 분포 및 return (*G*<sub>t</sub>)이 있었는데, Monte-Carlo 방식은 이들의 variance가 커 gradient를 급격하게 변화시키고 따라서 안정적인 학습을 수행하는데 한계가 있었습니다.
+## 3-2. Actor-critic ([논문](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/2.%20Actor-critic/Actor-critic%20algorithm.pdf)|[코드](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/2.%20Actor-critic)|[참고](https://medium.freecodecamp.org/an-intro-to-advantage-actor-critic-methods-lets-play-sonic-the-hedgehog-86d6240171d))
+이전에 살펴본 REINFORCE의 Monte-Carlo method는 에피소드가 끝날때 까지 기다렸다가 업데이트를 하는 방식을 채택했습니다. Gradient의 업데이트 수식을 살펴보면, 정책으로 도출되는 행동들에 대한 확률 분포 및 expected future return (*G*<sub>t</sub>)이 있었는데, Monte-Carlo 방식은 이들의 variance가 커 gradient를 급격하게 변화시키고 따라서 안정적인 학습을 수행하는데 한계가 있었습니다. 이에 대한 대안으로 등장한 것이 바로 Actor-critic 알고리즘 입니다.
 
-Monte-Carlo 방식과 상반되는 방식으로는 Temporal difference(TD) 방식이 있습니다. TD 방식은 다음 time step과의 오차인 TD-error를 이용해 에피소드의 전체 time-step이 다 지날때 까지 업데이트를 미루는 것이 아니라, 현재 time step의 예측 가치와 다음 time-step의 target 가치의 오차를 계산해 업데이트에 활용하는 방식입니다. 이를 위해서는 time step마다 agent가 행동해보고, 그 행동에 대한 가치를 평가하여 agent의 정책을 계속해서 변화해 나갑니다. 이 때 agent의 action을 결정하는 것을 actor라고 합니다.
+Actor-critic 알고리즘을 자세히 살펴보기 전, 비교를 통해 이해를 돕고자 합니다. REINFORCE의 Monte-Carlo 방식과 상반되는 방식으로는 Temporal difference(TD) 방식이 있습니다. TD 방식은 다음 time step과의 오차인 TD-error를 이용해 에피소드의 전체 time-step이 다 지날때 까지 업데이트를 미루는 것이 아니라, 현재 time step의 예측 가치와 다음 time-step의 target 가치의 오차를 계산해 업데이트에 활용하는 방식입니다. 이를 위해서는 time step마다 agent가 행동해보고, 그 행동에 대한 가치를 평가하여 agent의 정책을 계속해서 변화해 나갑니다. 이 때 agent의 action을 결정하는 것을 actor라고 합니다.
+
 한편, actor의 행동을 평가하는 다른 요인이 존재하는데, 이를 critic이라고 합니다. Critic은 actor의 행동으로 일어나는 상태 전이에 대해 value function를 이용, TD-error를 계산해 actor의 policy update가 일어날 수 있도록 합니다. 또한 critic은 상태함수를 TD-error를 활용해 update합니다.
-즉, Actor-critic은 actor와 critic이 매 time-step에서 TD-error를 활용해 각각 policy network (parameterized with θ)와 value-function을 업데이트하는 policy gradient 알고리즘이라고 할 수 있습니다. Actor-critic 알고리즘의 구조는 아래 그림과 같습니다. 
+즉, Actor-critic은 actor와 critic이 매 time-step에서 TD-error를 활용해 각각 policy network (parameterized with θ)와 value-function (parameterized with ω)을 업데이트하는 policy gradient 알고리즘이라고 할 수 있습니다. Actor-critic 알고리즘의 구조는 아래 그림과 같습니다. 
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/Actor-critic.png)
 
-직관적으로 위 그림을 이해하자면 actor와 critic이 TD-error를 활용해 자신들의 업데이트를 수행한다는 것을 확인할 수 있습니다. Actor가 취한 행동으로 다음 상태와 보상을 환경으로부터 받으면, critic의 value function이 TD-error를 계산하고 이를 actor의 policy network(policy estimator)와 critic의 value function(value estimator)를 업데이트 합니다. 이 때 유의할 점은 actor와 critic은 각자 다른 독립적인 parameter를 업데이트 한다는 점입니다. Actor는 policy를 approximate하기 위해 θ라는 parameter를, critic은 value-function approximation을 위해 ω라는 parameter를 활용한다고 하겠습니다.
+직관적으로 위 그림을 이해하자면 actor와 critic이 TD-error를 활용해 자신들의 업데이트를 수행한다는 것을 확인할 수 있습니다. Actor가 취한 행동으로 다음 상태와 보상을 환경으로부터 받으면, critic의 value function이 TD-error를 계산하고 이를 actor의 policy network(policy estimator)와 critic의 value function(value estimator)를 업데이트 합니다. 이 때 유의할 점은 actor와 critic은 각자 다른 독립적인 parameter를 업데이트 한다는 점입니다. 
 
+수식으로 REINFORCE의 Monte-Carlo method 기반의 policy update와 actor-critic의 TD-error 기반의 policy update 방식을 살펴보면 아래 그림과 같습니다:
+
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor-critic-newupdate-policy.png)
+
+기존 REINFORCE의 경우, 마지막 R로 표기된 cumulative future reward (return)이 곱해지기 위해 episode의 종료까지의 과정이 필요했습니다. 하지만, actor-critic은 이를 대신해 critic의 value function을 활용합니다. 각 approximator(policy와 value function)의 업데이트는 actor와 critic이 독립적으로 수행하지만, 결국 이 구조를 통해 critic의 평가가 actor의 policy update에 반영되는 것입니다.
 
 일반적으로 critic은 state-value function을 사용합니다. 매 time-step에 대한 TD-error(δ)는 아래와 같은 수식(파란색 밑줄)으로 나타낼 수 있습니다.
 
