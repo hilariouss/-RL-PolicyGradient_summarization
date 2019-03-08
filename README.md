@@ -25,7 +25,7 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
 | µ(*s*) | Deterministic policy. π와 명시적으로 구별하기 위한 다른 표기를 사용합니다. |
 | *V*(*s*) | State-value function. Agent의 상태에 대한 미래 가치를 나타냅니다. 특정 정책을 따르는 것에 구애받지 않고 가치 기반 강화학습을 할 경우 활용하며, *V*(*s*)가 ω로 parameterized될 경우 V<sub>ω</sub> (*s*)와 같이 표기될 수 있습니다. *ϵ*-greedy와 같은 학습 방법을 사용 예로 들 수 있습니다. |
 | *V*<sup>*π*</sup>(*s*) | Policy π를 따르는 가치함수 *V*<sup>*π*</sup>(.)로 상태 *s*의 (expected) return을 나타냅니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/V_pi.png) |
-| *Q*(*s*, *a*) | Action-value function. *V*(*s*)가 **상태**의 가치를 나타냈다면, *Q*(*s*, *a*)는 행동별 return을 나타냅니다. 역시 ω로 parameterized될 경우 Q<sub>ω</sub> (*s*, *a*)와 같이 표기될 수 있습니다. |
+| *Q*(*s*, *a*) | Action-value function. *V*(*s*)가 **상태**의 가치를 나타냈다면, *Q*(*s*, *a*)는 행동별 return을 나타냅니다. 역시 ω로 parameterized될 경우 Q<sub>ω</sub> (*s*, *a*)와 같이 표기될 수 있습니다. 소문자 q를 혼용할 수 있습니다. |
 | *Q*<sup>π</sup>(*s*, *a*) | *V*<sup>*π*</sup>(*s*)와 유사하게 **상태와 행동 pair (*s*,*a*)** 에 대해 policy π를 따르는 action-value function (Q-function)의 값(return)을 나타냅니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Q_pi.png) |
 | *A*(*s*, *a*) | Advantage function. *V*(*s*)를 baseline으로 하여, 상태 *s*에서 취할 수 있는 행동 *a*별 우수성을 나타내는데 사용하는 함수입니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/A_10.png)|
 
