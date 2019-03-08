@@ -96,7 +96,7 @@ REINFORCE가 Monte-Carlo policy gradient라고 불리는 이유는 Monte-Carlo �
 
 한편, REINFORCE의 다른 변화한 버전도 존재하는데, 알고리즘의 가장 아래 return으로 표기된 *G*<sub>t</sub>에서 baseline 역할을 하는 state-value function을 뺀 것을 활용하기도 합니다. 이는 gradient estimation의 variance는 감소시키면서 동시에 bias는 유지하기 위함입니다. 즉, Q 함수로 나타나는 return에서 state-value function을 뺀 advantage 함수 A(s, a)가 *G*<sub>t</sub>를 대체 수 있습니다.
 
-## 3-2. Actor-critic ([논문](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/2.%20Actor-critic/Actor-critic%20algorithm.pdf)|[코드](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/2.%20Actor-critic))
+## 3-2. Actor-critic ([논문](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/2.%20Actor-critic/Actor-critic%20algorithm.pdf)|[코드](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/2.%20Actor-critic)[참고](https://medium.freecodecamp.org/an-intro-to-advantage-actor-critic-methods-lets-play-sonic-the-hedgehog-86d6240171d))
 이전에 살펴본 REINFORCE의 Monte-Carlo method는 에피소드가 끝날때 까지 기다렸다가 업데이트를 하는 방식을 채택했습니다. Gradient의 업데이트 수식을 살펴보면, 정책으로 도출되는 행동들에 대한 확률 분포 및 return (*G*<sub>t</sub>)이 있었는데, Monte-Carlo 방식은 이들의 variance가 커 gradient를 급격하게 변화시키고 따라서 안정적인 학습을 수행하는데 한계가 있었습니다.
 
 Monte-Carlo 방식과 상반되는 방식으로는 Temporal difference(TD) 방식이 있습니다. TD 방식은 다음 time step과의 오차인 TD-error를 이용해 에피소드의 전체 time-step이 다 지날때 까지 업데이트를 미루는 것이 아니라, 현재 time step의 예측 가치와 다음 time-step의 target 가치의 오차를 계산해 업데이트에 활용하는 방식입니다. 이를 위해서는 time step마다 agent가 행동해보고, 그 행동에 대한 가치를 평가하여 agent의 정책을 계속해서 변화해 나갑니다. 이 때 agent의 action을 결정하는 것을 actor라고 합니다.
@@ -105,7 +105,10 @@ Monte-Carlo 방식과 상반되는 방식으로는 Temporal difference(TD) 방�
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/Actor-critic.png)
 
-직관적으로 위 그림을 이해하자면 actor와 critic이 TD-error를 활용해 자신들의 업데이트를 수행한다는 것을 확인할 수 있습니다. Actor가 취한 행동으로 다음 상태와 보상을 환경으로부터 받으면, critic의 value function이 TD-error를 계산하고 이를 actor의 policy network(policy estimator)와 critic의 value function(value estimator)를 업데이트 합니다. 일반적으로 critic은 state-value function을 사용합니다. 매 time-step에 대한 TD-error(δ)는 아래와 같은 수식으로 나타낼 수 있습니다.
+직관적으로 위 그림을 이해하자면 actor와 critic이 TD-error를 활용해 자신들의 업데이트를 수행한다는 것을 확인할 수 있습니다. Actor가 취한 행동으로 다음 상태와 보상을 환경으로부터 받으면, critic의 value function이 TD-error를 계산하고 이를 actor의 policy network(policy estimator)와 critic의 value function(value estimator)를 업데이트 합니다. 이 때 유의할 점은 actor와 critic은 각자 다른 독립적인 parameter를 업데이트 한다는 점입니다. Actor는 policy를 approximate하기 위해 θ라는 parameter를, critic은 value-function approximation을 위해 ω라는 parameter를 활용한다고 하겠습니다.
+
+
+일반적으로 critic은 state-value function을 사용합니다. 매 time-step에 대한 TD-error(δ)는 아래와 같은 수식(파란색 밑줄)으로 나타낼 수 있습니다.
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/delta.png)
 
