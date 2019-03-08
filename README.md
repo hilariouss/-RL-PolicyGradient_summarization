@@ -112,21 +112,20 @@ Actor-critic 알고리즘을 자세히 살펴보기 전, 비교를 통해 이해
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor-critic-newupdate-policy.png)
 
+```
 기존 REINFORCE의 경우, 마지막 R로 표기된 cumulative future reward (return)이 곱해지기 위해 episode의 종료까지의 과정이 필요했습니다. 하지만, actor-critic은 이를 대신해 critic의 value function을 활용합니다. 각 approximator(policy와 value function)의 업데이트는 actor와 critic이 독립적으로 수행하지만, 결국 이 구조를 통해 critic의 평가가 actor의 policy update에 반영되는 것입니다.
+```
+Actor와 critic의 update 수식은 아래와 같습니다.
+```
+1. Actor policy update
+```
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor_update.png)
+```
+2. Critic value approximator update
+```
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/critic_update.png)
 
-일반적으로 critic은 state-value function을 사용합니다. 매 time-step에 대한 TD-error(δ)는 아래와 같은 수식(파란색 밑줄)으로 나타낼 수 있습니다.
-
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/delta.png)
-
-여기서 *V*함수는 critic의 현재 value function입니다. 이 TD-error는 현재 상태 *s*<sub>t</sub>에서 actor에 의해 선택된 행동 *a*<sub>t</sub>을 평가하는데 사용됩니다. 만약 TD-error의 값이 양수라면 현재 상태의 가치 대비 미래 상태의 가치가 더욱 크다는 의미이므로, 좋은 행동을 했다고 평가할 수 있습니다. 만약 반대의 경우, 이러한 행동을 덜 하도록 (weakened) actor을 업데이트 합니다. 
-
-만약 action들이 Gibbs softmax method
- ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor-critic-pi.png)
-로 나타나는 확률분포라고 해봅시다. *p*(*s*, *a*)는 time step *t*에서 상태 *s*<sub>t</sub>=*s*일 때 어떤 행동 *a* (*a*<sub>t</sub>=*a*)에 대한 확률입니다. 이 때, 정책을 이루는 각 행동에 대한 확률값의 학습은 아래와 같은 수식으로 갱신됩니다. 여기서 β는 positive step-size parameter로, 정책의 업데이트의 정도를 조절하는 파라미터로 활용됩니다. 
-
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor-critic-policyupdate.png)
-
-
+Value function의 update 수식에서 β는 positive step-size parameter로 learning rate역할을 수행하며, policy update의 learning rate α와 구별됩니다.
 
 ## 3-3. Off-policy policy gradient (xxxx)
 
