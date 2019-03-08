@@ -96,7 +96,7 @@ REINFORCE가 Monte-Carlo policy gradient라고 불리는 이유는 Monte-Carlo �
 
 한편, REINFORCE의 다른 변화한 버전도 존재하는데, 알고리즘의 가장 아래 return으로 표기된 *G*<sub>t</sub>에서 baseline 역할을 하는 state-value function을 뺀 것을 활용하기도 합니다. 이는 gradient estimation의 variance는 감소시키면서 동시에 bias는 유지하기 위함입니다. 즉, Q 함수로 나타나는 return에서 state-value function을 뺀 advantage 함수 A(s, a)가 *G*<sub>t</sub>를 대체 수 있습니다.
 
-## 3-2. Actor-critic ([논문](https://papers.nips.cc/paper/1786-actor-critic-algorithms.pdf)|)
+## 3-2. Actor-critic ([논문](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/2.%20Actor-critic/Actor-critic%20algorithm.pdf)|)
 ## 3-3. Off-policy policy gradient (xxxx)
 
 ## 3-4. A2C (Advantage Actor-Critic)
