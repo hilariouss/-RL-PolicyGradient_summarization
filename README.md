@@ -113,7 +113,10 @@ Actor-critic 알고리즘을 자세히 살펴보기 전, 비교를 통해 이해
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor-critic-newupdate-policy.png)
 
 ```
-기존 REINFORCE의 경우, 마지막 R로 표기된 cumulative future reward (return)이 곱해지기 위해 episode의 종료까지의 과정이 필요했습니다. 하지만, actor-critic은 이를 대신해 critic의 value function을 활용합니다. 각 approximator(policy와 value function)의 업데이트는 actor와 critic이 독립적으로 수행하지만, 결국 이 구조를 통해 critic의 평가가 actor의 policy update에 반영되는 것입니다.
+기존 REINFORCE의 경우, 마지막 R로 표기된 cumulative future reward (return)이 곱해지기 위해 episode의 
+종료까지의 과정이 필요했습니다. 하지만, actor-critic은 이를 대신해 critic의 value function을 활용합니다. 
+각 approximator(policy와 value function)의 업데이트는 actor와 critic이 독립적으로 수행하지만, 결국 
+이 구조를 통해 critic의 평가가 actor의 policy update에 반영되는 것입니다.
 ```
 Actor와 critic의 update 수식은 아래와 같습니다.
 ```
