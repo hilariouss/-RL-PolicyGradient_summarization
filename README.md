@@ -136,6 +136,12 @@ Value function의 update 수식에서 β는 positive step-size parameter로 lear
 
 ## 3-3. Off-policy policy gradient ([논문1](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/3.%20Off-policy%20policy%20gradient/Off-policy_Actor_critic%20(Off-PAC).pdf)|[논문2](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/3.%20Off-policy%20policy%20gradient/Policy%20Gradient%20Methods%20for%20Off-policy%20control.pdf)|[코드(TBD)](TBD))
 
+위에서 살펴본 두 알고리즘 (REINFORCE, vanlilla actor-critic) 알고리즘은 모두 on-policy 알고리즘으로, sample을 학습하는 policy와 sample을 모으는 policy가 동일한 알고리즘입니다. 즉, 우리가 update하고자 하는 대상인 *target policy*가 곧 sample을 수집하는 *behaviour policy*와 동일하다는 말입니다. 이러한 on-policy 알고리즘은 학습하는 policy와 sample을 수집하는 policy가 동일하기 때문에, 한 번 업데이트를 하고나면 이전의 experience는 모두 무의미해져 사용할 수 없게 된다. 이는 sample efficiency를 저하시키는 요소이며, exploration 및 학습이후 재사용이 불가능하다는 단점이 존재한다.
+
+하지만, off-policy 알고리즘은 *target policy*와 *behaviour policy*가 달라, 현재 학습하는 *estimation policy*가 과거에 했던 experience도 학습에 사용할 수 있다는 장점이 있다. 이는 sample efficiency를 향상시킬 수 있다는 장점이 존재한다.
+
+
+
 ## 3-4. A2C (Advantage Actor-Critic)
 ## 3-5. A3C (Asynchronous Advantage Actor-Critic)
 ## 3-6. DPG (Deterministic Policy Gradient)
