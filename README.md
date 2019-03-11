@@ -138,7 +138,7 @@ Value function의 update 수식에서 β는 positive step-size parameter로 lear
 
 위에서 살펴본 두 알고리즘 (REINFORCE, vanlilla actor-critic) 알고리즘은 모두 on-policy 알고리즘으로, sample을 학습하는 policy와 sample을 모으는 policy가 동일한 알고리즘입니다. 즉, 우리가 update하고자 하는 대상인 *target policy*가 곧 sample을 수집하는 *behaviour policy*와 동일합니다. 이러한 on-policy 알고리즘은 학습하는 policy와 sample을 수집하는 policy가 동일하기 때문에, 한 번 업데이트를 하고나면 이전의 experience는 모두 무의미해져 사용할 수 없게 됩니다. 이는 sample efficiency를 저하시키는 요소이며, exploration 및 학습이후 재사용이 불가능하다는 단점이 존재합니다.
 
-하지만, off-policy 알고리즘은 *target policy*와 *behaviour policy*가 달라, 현재 학습하는 *estimation policy*가 과거에 했던 experience도 학습에 사용할 수 있다는 장점이 있습니다. 이것이 on-policy 대비 향상된 측면인 sample efficiency라고 할 수 있습니다. 즉, Off-policy 알고리즘에서 *target policy*는 학습의 반영이 이루어지는 policy이며, *behaviour policy*는 exploration을 통한 behavior 시행 및 sample을 수집하는 policy라고 할 수 있습니다. 
+하지만, **off-policy 알고리즘은 *target policy*와 *behaviour policy*가 달라, 현재 학습하는 *estimation policy*가 과거에 했던 experience도 학습에 사용할 수 있다는 장점**이 있습니다. 즉, 과거의 experience를 target policy update에 활용할 수 있어 on-policy 대비 **sample efficiency가 향상**되었다라고 할 수 있습니다. 즉, Off-policy 알고리즘에서 *target policy*는 학습의 반영이 이루어지는 policy이며, *behaviour policy*는 exploration을 통한 behavior 시행 및 sample을 수집하는 policy라고 할 수 있습니다. 
 
 
 
