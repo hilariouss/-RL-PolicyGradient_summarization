@@ -89,7 +89,7 @@ Policy-based 방식은 continuous space의 state 또는 action space에 대해 �
 
 REINFORCE가 Monte-Carlo policy gradient라고 불리는 이유는 Monte-Carlo 방법으로 full trajectory(episode)를 구하고, 이를 이루는 샘플들을 바탕으로 return을 계산하여 policy update에 활용하기 때문입니다. REINFORCE의 알고리즘은 아래와 같습니다.
 
-### REINFORCE algorithm
+### *REINFORCE algorithm*
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/REINFORCE_algo.png)
 
 간단하게 알고리즘을 살펴보면 초기 policy parameter를 랜덤하게 초기화하고, 이를 바탕으로 하나의 trajectory를 생성하는 것을 알 수 있습니다. 이후, 생성한 trajectory의 sample들에 대한 return을 계산하고, iterative하게 policy를 gradient ascent방식으로 갱신하는 것을 확인할 수 있습니다.
@@ -130,7 +130,7 @@ Actor와 critic의 update 수식은 아래와 같습니다.
 
 Value function의 update 수식에서 β는 positive step-size parameter로 learning rate역할을 수행하며, policy update의 learning rate α와 구별됩니다. Actor-critic 알고리즘은 아래와 같습니다.
 
-### (On-policy) Actor-critic algorithm
+### *(On-policy) Actor-critic algorithm*
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor_critic_algo.png)
 
