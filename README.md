@@ -134,7 +134,7 @@ Value function의 update 수식에서 β는 positive step-size parameter로 lear
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor_critic_algo.png)
 
-## 3-3. Off-policy policy gradient ([논문](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/3.%20Off-policy%20policy%20gradient/Off-policy_Actor_critic%20(Off-PAC).pdf)|[코드](TBD))
+## 3-3. Off-policy policy gradient ([논문](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/3.%20Off-policy%20policy%20gradient/Off-policy_Actor_critic%20(Off-PAC).pdf)|[코드(TBD)](TBD))
 
 ## 3-4. A2C (Advantage Actor-Critic)
 ## 3-5. A3C (Asynchronous Advantage Actor-Critic)
