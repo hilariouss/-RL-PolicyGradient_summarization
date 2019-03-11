@@ -104,13 +104,13 @@ Actor-critic 알고리즘을 자세히 살펴보기 전, 비교를 통해 이해
 한편, actor의 행동을 평가하는 다른 요인이 존재하는데, 이를 critic이라고 합니다. Critic은 actor의 행동으로 일어나는 상태 전이에 대해 value function를 이용, TD-error를 계산해 actor의 policy update가 일어날 수 있도록 합니다. 또한 critic은 상태함수를 TD-error를 활용해 update합니다.
 즉, Actor-critic은 actor와 critic이 매 time-step에서 TD-error를 활용해 각각 policy network (parameterized with θ)와 value-function (parameterized with ω)을 업데이트하는 policy gradient 알고리즘이라고 할 수 있습니다. Actor-critic 알고리즘의 구조는 아래 그림과 같습니다. 
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/3-2.AC/Actor-critic.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-2.AC/Actor-critic.png)
 
 직관적으로 위 그림을 이해하자면 actor와 critic이 TD-error를 활용해 자신들의 업데이트를 수행한다는 것을 확인할 수 있습니다. Actor가 취한 행동으로 다음 상태와 보상을 환경으로부터 받으면, critic의 value function이 TD-error를 계산하고 이를 actor의 policy network(policy estimator)와 critic의 value function(value estimator)를 업데이트 합니다. 이 때 유의할 점은 actor와 critic은 각자 다른 독립적인 parameter를 업데이트 한다는 점입니다. 
 
 수식으로 REINFORCE의 Monte-Carlo method 기반의 policy update와 actor-critic의 TD-error 기반의 policy update 방식을 살펴보면 아래 그림과 같습니다:
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/3-2.AC/actor-critic-newupdate-policy.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-2.AC/actor-critic-newupdate-policy.png)
 
 ```
 기존 REINFORCE의 경우, 마지막 R로 표기된 cumulative future reward (return)이 곱해지기 위해 episode의 
@@ -122,17 +122,17 @@ Actor와 critic의 update 수식은 아래와 같습니다.
 ```
 1. Actor policy update
 ```
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/3-2.AC/actor_update.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-2.AC/actor_update.png)
 ```
 2. Critic value approximator update
 ```
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/3-2.AC/critic_update.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-2.AC/critic_update.png)
 
 Value function의 update 수식에서 β는 positive step-size parameter로 learning rate역할을 수행하며, policy update의 learning rate α와 구별됩니다. Actor-critic 알고리즘은 아래와 같습니다.
 
 ### *(On-policy) Actor-critic algorithm*
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/3-2.AC/actor_critic_algo.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-2.AC/actor_critic_algo.png)
 
 ## 3-3. Off-policy policy gradient ([논문1](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/3.%20Off-policy%20policy%20gradient/Off-policy_Actor_critic%20(Off-PAC).pdf)|[논문2](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/3.%20Off-policy%20policy%20gradient/Policy%20Gradient%20Methods%20for%20Off-policy%20control.pdf)|[코드(TBD)](TBD))
 
@@ -152,13 +152,13 @@ sample efficiency를 향상시킵니다.
 
 그렇다면 어떻게 *off-policy* 알고리즘의 gradient를 계산할 수 있는지 알아보겠습니다. 이전에 짚어본 *on-policy*와의 차이점을 상기해보면, *off-policy*알고리즘은 target policy와 behaviour policy가 따로 존재한다고 했습니다. 즉, 각 policy를 표현하는 parameter가 독립적으로 존재합니다. Target policy를 parameter θ로 parameterize한 것을 π<sub>θ</sub>(*a*|*s*), behaviour policy를 β(*a*|*s*)라고 표현하면 policy gradient의 objective function은 아래와 같이 behaviour policy β(*a*|*s*)로 정의된 상태분포에 대한 보상의 합으로 나타낼 수 있습니다.
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_obj_fn.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_obj_fn.png)
 
-위의 objective function에서 *d*<sup>β</sup>(*s*)는 behaviour policy β의 stationary distribution입니다. 즉, ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_state_distribution.png)입니다. 유의할 점은 *Q*<sup>π</sup>는 target policy로 계산된다는 것입니다. Training observation이 행동 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_action.png)으로 sampling 된다고 할 때, 위 목적식에 대한 gradient 계산은 아래와 같습니다.
+위의 objective function에서 *d*<sup>β</sup>(*s*)는 behaviour policy β의 stationary distribution입니다. 즉, ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_state_distribution.png)입니다. 유의할 점은 *Q*<sup>π</sup>는 target policy로 계산된다는 것입니다. Training observation이 행동 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_action.png)으로 sampling 된다고 할 때, 위 목적식에 대한 gradient 계산은 아래와 같습니다.
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_gradient.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_gradient.png)
 
-여기서 파란색으로 표시된 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_rho.png)는 target policy의 결과와 behaviour policy의 결과의 비율입니다 (ratio of the target policy to the behaviour policy). 즉, 두 policy간의 비율을 적용한 점과, stationary distribution이 behaviour policy를 따른다는 점이 이전에 살펴본 on-policy policy gradient 알고리즘과의 차이점이라고 할 수 있습니다.
+여기서 파란색으로 표시된 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_rho.png)는 target policy의 결과와 behaviour policy의 결과의 비율입니다 (ratio of the target policy to the behaviour policy). 즉, 두 policy간의 비율을 적용한 점과, stationary distribution이 behaviour policy를 따른다는 점이 이전에 살펴본 on-policy policy gradient 알고리즘과의 차이점이라고 할 수 있습니다.
 
 ## 3-4. A2C (Advantage Actor-Critic)
 ## 3-5. A3C (Asynchronous Advantage Actor-Critic)
