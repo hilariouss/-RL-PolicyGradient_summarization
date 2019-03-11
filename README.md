@@ -142,7 +142,24 @@ Value function의 update 수식에서 β는 positive step-size parameter로 lear
 
 정리하면 *off-policy* 알고리즘에서 *target policy*는 학습의 반영이 이루어지는 policy이며, *behaviour policy*는 exploration을 통한 behavior 시행 및 sample을 수집하는 policy라고 할 수 있습니다. 
 
+이러한 *Off-policy* 알고리즘의 특징은 아래와 같이 두 가지로 정리할 수 있습니다.
 
+```
+1. 학습을 위해 full trajectories를 필요로 하지 않으며, 과거 episode를 재사용하는 
+experience replay(경험 재생)을 통해 sample efficiency를 향상시킵니다.
+2. Sample collection들이 target policy를 통해 behaviour policy를 따라서 
+generation되기 때문에, 더 나은 exploration을 수행할 수 있습니다.
+```
+
+그렇다면 어떻게 *off-policy* 알고리즘의 gradient를 계산할 수 있는지 알아보겠습니다. 이전에 짚어본 *on-policy*와의 차이점을 상기해보면, *off-policy*알고리즘은 target policy와 behaviour policy가 따로 존재한다고 했습니다. 즉, 각 policy를 표현하는 parameter가 독립적으로 존재합니다. Target policy를 parameter θ로 parameterize한 것을 π<sub>θ</sub>(*a*|*s*), behaviour policy를 β(*a*|*s*)라고 표현하면 policy gradient의 objective function은 아래와 같이 behaviour policy β(*a*|*s*)로 정의된 상태분포에 대한 보상의 합으로 나타낼 수 있습니다.
+
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3.%20Off-policy%20policy%20gradient/offpolicy_pg_obj_fn.png)
+
+위의 objective function에서 *d*<sup>β</sup>(*s*)는 behaviour policy β의 stationary distribution입니다. 즉, ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3.%20Off-policy%20policy%20gradient/offpolicy_pg_state_distribution.png)입니다. 유의할 점은 *Q*<sup>π</sup>는 target policy로 계산된다는 것입니다. Training observation이 행동 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3.%20Off-policy%20policy%20gradient/offpolicy_pg_action.png)으로 sampling 된다고 할 때, 위 목적식에 대한 gradient 계산은 아래와 같습니다.
+
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3.%20Off-policy%20policy%20gradient/offpolicy_pg_gradient.png)
+
+여기서 파란색으로 표시된 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3.%20Off-policy%20policy%20gradient/offpolicy_pg_rho.png)는 target policy의 결과와 behaviour policy의 결과의 비율입니다 (ratio of the target policy to the behaviour policy). 즉, 두 policy간의 비율을 적용한 점과, stationary distribution이 behaviour policy를 따른다는 점이 이전에 살펴본 on-policy policy gradient 알고리즘과의 차이점이라고 할 수 있습니다.
 
 ## 3-4. A2C (Advantage Actor-Critic)
 ## 3-5. A3C (Asynchronous Advantage Actor-Critic)
