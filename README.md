@@ -147,7 +147,8 @@ Value function의 update 수식에서 β는 positive step-size parameter로 lear
 ```
 1. 학습을 위해 full trajectories를 필요로 하지 않으며, 과거 episode를 재사용하는 experience replay(경험 재생)을 통해
 sample efficiency를 향상시킵니다.
-2. Sample collection들이 target policy를 통해 behaviour policy를 따라서 generation되기 때문에, 더 나은 exploration을 수행할 수 있습니다.
+2. Sample collection들이 target policy를 통해 behaviour policy를 따라서 generation되기 때문에, 더 나은 exploration을
+수행할 수 있습니다.
 ```
 
 그렇다면 어떻게 *off-policy* 알고리즘의 gradient를 계산할 수 있는지 알아보겠습니다. 이전에 짚어본 *on-policy*와의 차이점을 상기해보면, *off-policy*알고리즘은 target policy와 behaviour policy가 따로 존재한다고 했습니다. 즉, 각 policy를 표현하는 parameter가 독립적으로 존재합니다. Target policy를 parameter θ로 parameterize한 것을 π<sub>θ</sub>(*a*|*s*), behaviour policy를 β(*a*|*s*)라고 표현하면 policy gradient의 objective function은 아래와 같이 behaviour policy β(*a*|*s*)로 정의된 상태분포에 대한 보상의 합으로 나타낼 수 있습니다.
