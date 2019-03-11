@@ -131,6 +131,7 @@ Actor와 critic의 update 수식은 아래와 같습니다.
 Value function의 update 수식에서 β는 positive step-size parameter로 learning rate역할을 수행하며, policy update의 learning rate α와 구별됩니다. Actor-critic 알고리즘은 아래와 같습니다.
 
 **(On-policy) Actor-critic algorithm**
+
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor_critic_algo.png)
 
 ## 3-3. Off-policy policy gradient (xxxx)
