@@ -19,15 +19,15 @@ Policy gradient는 강화학습 문제들을 푸는 방법입니다. **Policy gr
 | *r* ∈ *R* | Environment로부터의 **보상**.|
 | *s*<sub>*t*</sub>, *a*<sub>*t*</sub> , *r*<sub>*t*</sub> | 어떤 trajectory 에서 time step *t* 일 때 agent의 상태, 행동, 보상.|
 | *γ* | 현재 보상 대비 미래 보상에 대한 페널티, 또는 감쇠상수. (0 < *γ* ≤ 1)| 
-| *G*<sub>*t*</sub> | Return. Agent 의 학습척도. ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/G_10.png) (**return은 누적 기대 보상값과 동일**합니다.) |
+| *G*<sub>*t*</sub> | Return. Agent 의 학습척도. ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/0.Preliminary/G_10.png) (**return은 누적 기대 보상값과 동일**합니다.) |
 | *P* (*s*<sup>'</sup>,*r*\|*s*,*a*) | 상태 전이 확률(state transition probability).|
 | π<sub>θ</sub> (*a*\|*s*) | Stochastic policy. 정책 π를 기준으로 *s*일 때 *a*를 행할 확률. π는 policy parameter θ로 표현됩니다.|
 | µ(*s*) | Deterministic policy. π와 명시적으로 구별하기 위한 다른 표기를 사용합니다. |
 | *V*(*s*) | State-value function. Agent의 상태에 대한 미래 가치를 나타냅니다. 특정 정책을 따르는 것에 구애받지 않고 가치 기반 강화학습을 할 경우 활용하며, *V*(*s*)가 ω로 parameterized될 경우 V<sub>ω</sub> (*s*)와 같이 표기될 수 있습니다. *ϵ*-greedy와 같은 학습 방법을 사용 예로 들 수 있습니다. |
-| *V*<sup>*π*</sup>(*s*) | Policy π를 따르는 가치함수 *V*<sup>*π*</sup>(.)로 상태 *s*의 (expected) return을 나타냅니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/V_pi.png) |
+| *V*<sup>*π*</sup>(*s*) | Policy π를 따르는 가치함수 *V*<sup>*π*</sup>(.)로 상태 *s*의 (expected) return을 나타냅니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/0.Preliminary/V_pi.png) |
 | *Q*(*s*, *a*) | Action-value function. *V*(*s*)가 **상태**의 가치를 나타냈다면, *Q*(*s*, *a*)는 행동별 return을 나타냅니다. 역시 ω로 parameterized될 경우 Q<sub>ω</sub> (*s*, *a*)와 같이 표기될 수 있습니다. 본문에서 소문자 q를 혼용할 수 있습니다. |
-| *Q*<sup>π</sup>(*s*, *a*) | *V*<sup>*π*</sup>(*s*)와 유사하게 **상태와 행동 pair (*s*,*a*)** 에 대해 policy π를 따르는 action-value function (Q-function)의 값(return)을 나타냅니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Q_pi.png) |
-| *A*(*s*, *a*) | Advantage function. *V*(*s*)를 baseline으로 하여, 상태 *s*에서 취할 수 있는 행동 *a*별 우수성을 나타내는데 사용하는 함수입니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/A_10.png)|
+| *Q*<sup>π</sup>(*s*, *a*) | *V*<sup>*π*</sup>(*s*)와 유사하게 **상태와 행동 pair (*s*,*a*)** 에 대해 policy π를 따르는 action-value function (Q-function)의 값(return)을 나타냅니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/0.Preliminary/Q_pi.png) |
+| *A*(*s*, *a*) | Advantage function. *V*(*s*)를 baseline으로 하여, 상태 *s*에서 취할 수 있는 행동 *a*별 우수성을 나타내는데 사용하는 함수입니다; ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/0.Preliminary/A_10.png)|
 
 <hr>
 
@@ -56,26 +56,26 @@ agent가 도달했을 때, 미래 가치에 대한 기댓값이 가장 높은 �
 # 2. Introduction and goal of *Policy gradient* 
 **Policy gradient**는 policy 자체를 직접적으로 modeling하고 optimize하는 방법입니다. Policy는 위 notation과 같이 policy parameter θ로 표현되며, 이는 π<sub>θ</sub> (*a*\|*s*) 라고 했습니다. Policy gradient는 이러한 policy를 포함하는 목적함수를 policy에 대한 parameter θ에 대한 기울기(gradient)를 구하여 목적함수를 최적화 합니다. 이 목적함수는 policy를 포함하는 reward function이 됩니다. 즉, policy를 포함하는 reward 함수를 목적함수로 설정하고, 이에 대한 θ의 gradient를 구해 이 목적함수를 최적화 하여 최대한의 보상을 얻도록 θ를 학습하는 것이 policy gradient라고 할 수 있겠습니다. 그럼 목적 함수(보상함수)를 살펴보겠습니다.
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/J_theta.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/J_theta.png)
 
-여기서 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/d^pi(s).png)는 Markov chain의 stationary distribution입니다. 
+여기서 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/d^pi(s).png)는 Markov chain의 stationary distribution입니다. 
 
-**Stationary distribution ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/d^pi(s).png)은 state 변화의 sequence를 표현하는 finite Markov chain이 있을 때, 충분히 큰 상태전이를 반복하다보면 어떤 상태에 도달하는 확률들이 수렴한다는 확률분포를 말합니다.** Stationary distribution의 매력적인 점은 초기 Markov chain의 상태전이 확률에 영향을 받지 않는다는 점입니다. 왜냐하면 최종적으로 이 stationary distribution이 수렴하는 확률분포에 도달할 것이기 때문입니다. Markov chain의 상태들에 대해 영원히 transition 하면 결국 어떤 terminal state에 도달한다는 확률이 불변한다는 것이라고 생각하면 좀 더 쉽습니다. 즉, 처음 상태가 *s*<sub>0</sub>이고, policy ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/pi_theta.png)를 따를 때, *t* time step이 흘렀을 때의 상태 *s*<sub>t</sub>가 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/s_{t}=s.png)가 될 확률이 곧 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/d^pi(s).png)가 되는 것입니다.
-결국 Stationary distribution을 수식으로 표현하면 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/d^pi_lim.png)가 됩니다.
+**Stationary distribution ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/d^pi(s).png)은 state 변화의 sequence를 표현하는 finite Markov chain이 있을 때, 충분히 큰 상태전이를 반복하다보면 어떤 상태에 도달하는 확률들이 수렴한다는 확률분포를 말합니다.** Stationary distribution의 매력적인 점은 초기 Markov chain의 상태전이 확률에 영향을 받지 않는다는 점입니다. 왜냐하면 최종적으로 이 stationary distribution이 수렴하는 확률분포에 도달할 것이기 때문입니다. Markov chain의 상태들에 대해 영원히 transition 하면 결국 어떤 terminal state에 도달한다는 확률이 불변한다는 것이라고 생각하면 좀 더 쉽습니다. 즉, 처음 상태가 *s*<sub>0</sub>이고, policy ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/pi_theta.png)를 따를 때, *t* time step이 흘렀을 때의 상태 *s*<sub>t</sub>가 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/s_{t}=s.png)가 될 확률이 곧 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/d^pi(s).png)가 되는 것입니다.
+결국 Stationary distribution을 수식으로 표현하면 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/d^pi_lim.png)가 됩니다.
 
-Policy-based 방식은 continuous space의 state 또는 action space에 대해 학습하는데 더욱 효과적 입니다. Discrete한 state 및 action들에 대한 가치는 value-based 방식에서 사용할 수 있었지만, continuous하여 무한한 state 또는 action space에 대한 문제일 경우 한계가 있습니다. 예를 들어 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/argmax.png)를 계산해 policy를 improve하는 policy iteration의 경우 무한한 action space에 대한 계산이 거의 불가능합니다.
+Policy-based 방식은 continuous space의 state 또는 action space에 대해 학습하는데 더욱 효과적 입니다. Discrete한 state 및 action들에 대한 가치는 value-based 방식에서 사용할 수 있었지만, continuous하여 무한한 state 또는 action space에 대한 문제일 경우 한계가 있습니다. 예를 들어 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/argmax.png)를 계산해 policy를 improve하는 policy iteration의 경우 무한한 action space에 대한 계산이 거의 불가능합니다.
 
-*Gradient ascent* 방식을 사용하여, 우리는 gradient ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/gradient_J.png)에 대해 가장 높은 return을 주는 방향으로 policy를 나타내는 parameter θ를 조절(학습)합니다. Gradient는 아래와 같이 표현됩니다.
+*Gradient ascent* 방식을 사용하여, 우리는 gradient ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/gradient_J.png)에 대해 가장 높은 return을 주는 방향으로 policy를 나타내는 parameter θ를 조절(학습)합니다. Gradient는 아래와 같이 표현됩니다.
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/J(theta)_derivation.png)
-이 때, ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/E_pi.png)는 state와 action distribution이 policy ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/pi_theta.png)를 모두 따르는 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/E_sdapi.png)임을 나타냅니다.
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/J(theta)_derivation.png)
+이 때, ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/E_pi.png)는 state와 action distribution이 policy ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/pi_theta.png)를 모두 따르는 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/E_sdapi.png)임을 나타냅니다.
 
 결국, (Vanilla) policy gradient는 아래 기댓값으로 표현된 θ에 대한 gradient를 활용합니다. 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/J(theta)_derivation_2.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/J(theta)_derivation_2.png)
 
 하지만 vanilla policy gradient는 bias가 없고, variance가 높아 bias는 유지하면서 variance는 줄이려는 다양한 policy gradient 알고리즘들이 제시되었습니다. 결국, Gradient에 대한 다양한 수식들이 존재하고, 이에 대한 일반식이 [Schulman et al., 2016](https://arxiv.org/abs/1506.02438)에 제시되었습니다. 일반화된 gradient에 대한 계산식 GAE(General advantage estimation)은 아래와 같습니다.
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/General_Gradient.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/2.Intro_and_goal_of_RL/General_Gradient.png)
 
 결국, Policy gradient 기반의 알고리즘들은 위와 같은 gradient를 활용해 expected future return을 maximize시키도록 policy parameter θ를 학습하는 것이라고 할 수 있습니다.
 
@@ -83,14 +83,14 @@ Policy-based 방식은 continuous space의 state 또는 action space에 대해 �
 ## 3-1. REINFORCE ([논문](https://link.springer.com/content/pdf/10.1007/BF00992696.pdf)|[코드](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/1.%20REINFORCE/REINFORCE_CartPole.py))
 **Monte-Carlo policy gradient**, 또는 **REINFORCE**(R.J. Williams, "Simple statistical gradient-following algorithms for connectionist reinforcement learning," *Machine learning*, vol. 8, pp. 3-4, 1992)는 episode의 샘플들을 활용해 policy parameter θ를 update합니다. 즉 episode에서 estimate할 수 있는 return 값을 활용해 policy parameter를 update 합니다. REINFORCE는 gradient에 대한 actual 값과 expectation of sample gradient가 동일하기 때문에 동작합니다. 무슨 의미인지 이해가 가지 않을 수 있어 아래 수식을 다시 첨부합니다:
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/REINFORCE.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/3-1.REINFORCE/REINFORCE.png)
 
 파란색의 박스는 gradient에 대한 actual value (proportional)를 나타내며, 빨간색의 박스는 gradient에 대한 expectation을 나타냅니다. 이 둘의 값이 동일하기 때문에 REINFORCE는 episode의 sample 값에 대한 return을 계산하고 이를 바탕으로 gradient를 update할 수 있습니다.
 
 REINFORCE가 Monte-Carlo policy gradient라고 불리는 이유는 Monte-Carlo 방법으로 full trajectory(episode)를 구하고, 이를 이루는 샘플들을 바탕으로 return을 계산하여 policy update에 활용하기 때문입니다. REINFORCE의 알고리즘은 아래와 같습니다.
 
 ### *REINFORCE algorithm*
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/REINFORCE_algo.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/3-1.REINFORCE/REINFORCE_algo.png)
 
 간단하게 알고리즘을 살펴보면 초기 policy parameter를 랜덤하게 초기화하고, 이를 바탕으로 하나의 trajectory를 생성하는 것을 알 수 있습니다. 이후, 생성한 trajectory의 sample들에 대한 return을 계산하고, iterative하게 policy를 gradient ascent방식으로 갱신하는 것을 확인할 수 있습니다.
 
@@ -104,13 +104,13 @@ Actor-critic 알고리즘을 자세히 살펴보기 전, 비교를 통해 이해
 한편, actor의 행동을 평가하는 다른 요인이 존재하는데, 이를 critic이라고 합니다. Critic은 actor의 행동으로 일어나는 상태 전이에 대해 value function를 이용, TD-error를 계산해 actor의 policy update가 일어날 수 있도록 합니다. 또한 critic은 상태함수를 TD-error를 활용해 update합니다.
 즉, Actor-critic은 actor와 critic이 매 time-step에서 TD-error를 활용해 각각 policy network (parameterized with θ)와 value-function (parameterized with ω)을 업데이트하는 policy gradient 알고리즘이라고 할 수 있습니다. Actor-critic 알고리즘의 구조는 아래 그림과 같습니다. 
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/Actor-critic.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/3-2.AC/Actor-critic.png)
 
 직관적으로 위 그림을 이해하자면 actor와 critic이 TD-error를 활용해 자신들의 업데이트를 수행한다는 것을 확인할 수 있습니다. Actor가 취한 행동으로 다음 상태와 보상을 환경으로부터 받으면, critic의 value function이 TD-error를 계산하고 이를 actor의 policy network(policy estimator)와 critic의 value function(value estimator)를 업데이트 합니다. 이 때 유의할 점은 actor와 critic은 각자 다른 독립적인 parameter를 업데이트 한다는 점입니다. 
 
 수식으로 REINFORCE의 Monte-Carlo method 기반의 policy update와 actor-critic의 TD-error 기반의 policy update 방식을 살펴보면 아래 그림과 같습니다:
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor-critic-newupdate-policy.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/3-2.AC/actor-critic-newupdate-policy.png)
 
 ```
 기존 REINFORCE의 경우, 마지막 R로 표기된 cumulative future reward (return)이 곱해지기 위해 episode의 
@@ -122,17 +122,17 @@ Actor와 critic의 update 수식은 아래와 같습니다.
 ```
 1. Actor policy update
 ```
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor_update.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/3-2.AC/actor_update.png)
 ```
 2. Critic value approximator update
 ```
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/critic_update.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/3-2.AC/critic_update.png)
 
 Value function의 update 수식에서 β는 positive step-size parameter로 learning rate역할을 수행하며, policy update의 learning rate α와 구별됩니다. Actor-critic 알고리즘은 아래와 같습니다.
 
 ### *(On-policy) Actor-critic algorithm*
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/actor_critic_algo.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/raw/master/Equation_img/Actor-critic/3-2.AC/actor_critic_algo.png)
 
 ## 3-3. Off-policy policy gradient ([논문1](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/3.%20Off-policy%20policy%20gradient/Off-policy_Actor_critic%20(Off-PAC).pdf)|[논문2](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/3.%20Off-policy%20policy%20gradient/Policy%20Gradient%20Methods%20for%20Off-policy%20control.pdf)|[코드(TBD)](TBD))
 
@@ -152,13 +152,13 @@ sample efficiency를 향상시킵니다.
 
 그렇다면 어떻게 *off-policy* 알고리즘의 gradient를 계산할 수 있는지 알아보겠습니다. 이전에 짚어본 *on-policy*와의 차이점을 상기해보면, *off-policy*알고리즘은 target policy와 behaviour policy가 따로 존재한다고 했습니다. 즉, 각 policy를 표현하는 parameter가 독립적으로 존재합니다. Target policy를 parameter θ로 parameterize한 것을 π<sub>θ</sub>(*a*|*s*), behaviour policy를 β(*a*|*s*)라고 표현하면 policy gradient의 objective function은 아래와 같이 behaviour policy β(*a*|*s*)로 정의된 상태분포에 대한 보상의 합으로 나타낼 수 있습니다.
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3.%20Off-policy%20policy%20gradient/offpolicy_pg_obj_fn.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_obj_fn.png)
 
-위의 objective function에서 *d*<sup>β</sup>(*s*)는 behaviour policy β의 stationary distribution입니다. 즉, ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3.%20Off-policy%20policy%20gradient/offpolicy_pg_state_distribution.png)입니다. 유의할 점은 *Q*<sup>π</sup>는 target policy로 계산된다는 것입니다. Training observation이 행동 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3.%20Off-policy%20policy%20gradient/offpolicy_pg_action.png)으로 sampling 된다고 할 때, 위 목적식에 대한 gradient 계산은 아래와 같습니다.
+위의 objective function에서 *d*<sup>β</sup>(*s*)는 behaviour policy β의 stationary distribution입니다. 즉, ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_state_distribution.png)입니다. 유의할 점은 *Q*<sup>π</sup>는 target policy로 계산된다는 것입니다. Training observation이 행동 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_action.png)으로 sampling 된다고 할 때, 위 목적식에 대한 gradient 계산은 아래와 같습니다.
 
-![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3.%20Off-policy%20policy%20gradient/offpolicy_pg_gradient.png)
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_gradient.png)
 
-여기서 파란색으로 표시된 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3.%20Off-policy%20policy%20gradient/offpolicy_pg_rho.png)는 target policy의 결과와 behaviour policy의 결과의 비율입니다 (ratio of the target policy to the behaviour policy). 즉, 두 policy간의 비율을 적용한 점과, stationary distribution이 behaviour policy를 따른다는 점이 이전에 살펴본 on-policy policy gradient 알고리즘과의 차이점이라고 할 수 있습니다.
+여기서 파란색으로 표시된 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_rho.png)는 target policy의 결과와 behaviour policy의 결과의 비율입니다 (ratio of the target policy to the behaviour policy). 즉, 두 policy간의 비율을 적용한 점과, stationary distribution이 behaviour policy를 따른다는 점이 이전에 살펴본 on-policy policy gradient 알고리즘과의 차이점이라고 할 수 있습니다.
 
 ## 3-4. A2C (Advantage Actor-Critic)
 ## 3-5. A3C (Asynchronous Advantage Actor-Critic)
@@ -175,14 +175,14 @@ sample efficiency를 향상시킵니다.
 
 # References
 
-*Todo (6/19)*
+*Todo (7/19)*
 - [x] 0. Preliminary
 - [x] 1. Value-based reinforcement learning
 - [x] 2. Introduction and goal of *Policy gradient*
 - [x] 3. Policy gradient algorithm
   - [x] 3-1. REINFORCE
   - [x] 3-2. Actor-critic
-  - [ ] 3-3. Off-policy policy gradient
+  - [x] 3-3. Off-policy policy gradient
   - [ ] 3-4. A2C
   - [ ] 3-5. A3C
   - [ ] 3-6. DPG
