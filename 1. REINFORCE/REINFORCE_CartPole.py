@@ -4,6 +4,10 @@ import gym
 
 # reference: https://fakabbir.github.io/reinforcement-learning/docs/cartpole/
 #            https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/1.%20REINFORCE/Reference/REINFORCE
+# Author: Dohyun, Kwon
+# Date: 8th, Mar., 2019.
+# Environment: OpenAI Gym, CartPole-v0
+# Algorithm: (on-policy) REINFORCE
 
 env = gym.make('CartPole-v0')
 env = env.unwrapped
