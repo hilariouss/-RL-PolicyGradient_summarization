@@ -8,11 +8,11 @@ env.seed(1) # Since PG has high variance, static seed value for replay
 
 # ===== 1. Hyperparameter ========== #
 # == 1-1. Environment parameter == #
-state_size = 4
-action_size = env.action_space
+state_size = env.observation_space.shape[0]
+action_size = env.action_space.n
 
 # == 1-2. Learning parameter == #
-total_episodes = 300
+total_episodes = 3000
 learning_rate = 1e-2
 gamma = 0.95
 #=================================#
@@ -55,13 +55,13 @@ with tf.name_scope('inputs'):
         fc2 = tf.contrib.layers.fully_connected(inputs=fc1,
                                                 num_outputs=action_size,
                                                 activation_fn=tf.nn.relu,
-                                                weights_initializer=tf.contrib.layers.xavier_initializer)
+                                                weights_initializer=tf.contrib.layers.xavier_initializer())
 
     with tf.name_scope('fc3'):
         fc3 = tf.contrib.layers.fully_connected(inputs=fc2,
                                                 num_outputs=action_size,
                                                 activation_fn=tf.nn.relu,
-                                                weights_initializer=tf.contrib.layers.xavier_initializer)
+                                                weights_initializer=tf.contrib.layers.xavier_initializer())
 
     with tf.name_scope("softmax"):
         softmax_action_prob_distribution = tf.nn.softmax(fc3)
