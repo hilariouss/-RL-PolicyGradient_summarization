@@ -2,6 +2,9 @@ import numpy as np
 import tensorflow as tf
 import gym
 
+# reference: https://fakabbir.github.io/reinforcement-learning/docs/cartpole/
+#            https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/1.%20REINFORCE/Reference/REINFORCE
+
 env = gym.make('CartPole-v0')
 env = env.unwrapped
 env.seed(1) # Since PG has high variance, static seed value for replay
@@ -12,7 +15,7 @@ state_size = env.observation_space.shape[0]
 action_size = env.action_space.n
 
 # == 1-2. Learning parameter == #
-total_episodes = 3000
+total_episodes = 1000
 learning_rate = 1e-2
 gamma = 0.95
 #=================================#
@@ -57,18 +60,16 @@ with tf.name_scope('inputs'):
                                                 activation_fn=tf.nn.relu,
                                                 weights_initializer=tf.contrib.layers.xavier_initializer())
 
-    with tf.name_scope('fc3'):
-        fc3 = tf.contrib.layers.fully_connected(inputs=fc2,
-                                                num_outputs=action_size,
-                                                activation_fn=tf.nn.relu,
-                                                weights_initializer=tf.contrib.layers.xavier_initializer())
+    with tf.name_scope('prob'):
+        softmax_action_prob_distribution = tf.contrib.layers.fully_connected(inputs=fc2,
+                                                                             num_outputs=action_size,
+                                                                             activation_fn=tf.nn.softmax,
+                                                                             weights_initializer=tf.contrib.layers.xavier_initializer())
 
-    with tf.name_scope("softmax"):
-        softmax_action_prob_distribution = tf.nn.softmax(fc3)
 
     with tf.name_scope('loss'):
         # Compute the loss via calculating CROSS ENTROPY
-        neg_log_prob = tf.nn.softmax_cross_entropy_with_logits_v2(logits=fc3, labels=actions)
+        neg_log_prob = tf.nn.softmax_cross_entropy_with_logits_v2(logits=softmax_action_prob_distribution, labels=actions)
         loss = tf.reduce_mean(neg_log_prob * discounted_and_normalized_rewards_)
 
     with tf.name_scope('train'):
@@ -94,6 +95,7 @@ episode_states, episode_actions, episode_rewards = [], [], []
 # model saver
 saver = tf.train.Saver()
 
+"""
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
 
@@ -169,5 +171,37 @@ with tf.Session() as sess:
         if episode % 100 == 0:
             saver.save(sess, "./models/model.ckpt")
             print("Model is saved (episode: {})".format(episode))
+"""
+# ===== 6. Test the agent ========== #
+with tf.Session() as sess:
+    env.reset()
+    rewards = []
 
-#with tf.Session()
+    # Load the model
+    saver.restore(sess, "./models/model.ckpt")
+
+    for episode in range(10):
+        state = env.reset()
+        time_step = 0
+        done = False
+        total_reward = 0
+        print("*"* 20)
+        print("Episode {}".format(episode))
+
+        while True:
+            # choose action among action distribution
+            action_prob_distribution = sess.run(softmax_action_prob_distribution, feed_dict={input_: state.reshape([1, 4])})
+            action = np.random.choice(range(action_prob_distribution.shape[1]), p=action_prob_distribution.ravel())
+
+            state_, reward, done, _ = env.step(action)
+
+            total_reward += reward
+
+            if done:
+                rewards.append(total_reward)
+                print("Score: ", total_reward)
+                break
+            state = state_
+
+    env.close()
+    print("Score over time: " + str(sum(rewards)/10))
