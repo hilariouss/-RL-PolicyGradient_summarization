@@ -5,6 +5,7 @@ import gym
 # Reference ============================================= #
 # https://github.com/sarcturus00/Tidy-Reinforcement-learning/blob/master/Algorithm/A2C_cartpole.py
 # https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/2.%20Actor-critic/Actor_critic.py
+# ==================================================== #
 
 np.random.seed(1)  # for reproducible
 tf.set_random_seed(1)  # as same
@@ -28,6 +29,7 @@ n_action_space = env.action_space.n
 
 # ==================================================== #
 # Actor network definition
+# ==================================================== #
 
 class Actor(object):
     def __init__(self, action_space, name):
@@ -61,6 +63,7 @@ class Actor(object):
 
 # ==================================================== #
 # Critic network definition
+# ==================================================== #
 
 class Critic(object):
     def __init__(self, name):
@@ -105,6 +108,7 @@ class ReplayMemory(object):
 
 # ==================================================== #
 # A2C implementation
+# ==================================================== #
 
 class A2C_Agent:
     def __init__(self, action_space, observation_space, lr_actor, lr_critic, gamma):
@@ -174,6 +178,10 @@ class A2C_Agent:
         self.sess.run(self.critic_train_optimizer, feed_dict={self.observation: observation, self.Q: Q})
 
         self.memory.reset()
+
+# ==================================================== #
+# Test the A2C agent
+# ==================================================== #
 
 env = gym.make('CartPole-v0')
 env.seed(1)
