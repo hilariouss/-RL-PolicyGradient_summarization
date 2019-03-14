@@ -11,8 +11,8 @@ tf.set_random_seed(1)  # as same
 
 # ===== Hyperparameter ========== #
 Output_graph = False  # Output
-max_episode = 3000
-max_timestep = 1000
+max_episode = 1000
+max_timestep = 100
 gamma = 0.9
 lr_actor = 0.001
 lr_critic = 0.01
@@ -34,25 +34,29 @@ class Actor(object):
         self.action_space = action_space
         self.name = name
 
-    def get_pi_theta(self, observation):
-        with tf.variable_scope(self.name):
+    def actor_network(self, observation, reuse):
+        with tf.variable_scope(self.name, reuse=reuse):
             h1 = tf.layers.dense(inputs=observation, units=10, activation=tf.nn.relu,
                                  kernel_initializer=tf.random_normal_initializer(mean=0, stddev=0.3),
                                  bias_initializer=tf.constant_initializer(0.1),
                                  name='hidden_layer_1')
-            pi_theta = tf.layers.dense(inputs=h1, units=self.action_space, activation=tf.nn.softmax,
+            logits_action_weights = tf.layers.dense(inputs=h1, units=self.action_space, activation=None,
                                        kernel_initializer=tf.random_normal_initializer(mean=0, stddev=0.3),
                                        bias_initializer=tf.constant_initializer(0.1),
                                        name="pi_theta")
-            return pi_theta
+            return logits_action_weights
     # action probability distribution
+    def get_action_prob(self, observation, reuse=False):
+        logits_action_weights = self.actor_network(observation, reuse)
+        action_prob = tf.nn.softmax(logits_action_weights, name='logits_action_weights') # what if change
+        return action_prob
     """
     # return negative log likelihood (cross entropy)
     """
-    def get_cross_entropy(self, observation, action):
-        pi_theta = self.get_pi_theta(observation) # action probability distribution get.
-        cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=pi_theta, labels=action)
-        # get cross entropy
+    def get_cross_entropy(self, observation, label_action_weights, reuse=True):
+        logits_action_weights = self.actor_network(observation, reuse) # action probability distribution get.
+        cross_entropy = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=logits_action_weights,
+                                                                       labels=label_action_weights)
         return cross_entropy
 
 # ==================================================== #
@@ -62,8 +66,8 @@ class Critic(object):
     def __init__(self, name):
         self.name = name
 
-    def get_value(self, observation):
-        with tf.variable_scope(self.name):
+    def critic_network(self, observation, reuse):
+        with tf.variable_scope(self.name, reuse=reuse):
             h1 = tf.layers.dense(inputs=observation, units=10, activation=tf.nn.relu,
                                  kernel_initializer=tf.random_normal_initializer(mean=0, stddev=0.3),
                                  bias_initializer=tf.constant_initializer(0.1),
@@ -74,8 +78,8 @@ class Critic(object):
                                     name="value")
             return value
 
-    def return_value(self, observation):
-        value = self.get_value(observation=observation)
+    def get_value(self, observation, reuse=False):
+        value = self.critic_network(observation=observation, reuse=reuse)
         return value
 
 # ==================================================== #
@@ -102,7 +106,7 @@ class ReplayMemory(object):
 # ==================================================== #
 # A2C implementation
 
-class AdvantageActorCritic:
+class A2C_Agent:
     def __init__(self, action_space, observation_space, lr_actor, lr_critic, gamma):
         # Parameter setting
         self.action_space = action_space
@@ -113,31 +117,41 @@ class AdvantageActorCritic:
 
         # Placeholder: state, action, q value
         self.observation = tf.placeholder(dtype=tf.float32, shape=[None, self.observation_space], name="observation")
-        self.action_label = tf.placeholder(dtype=tf.int32, shape=[None, self.action_space], name="action")  # label
-        self.Q = tf.placeholder(dtype=tf.float32, shape=[None, ], name="Q_value")
+        self.action_label = tf.placeholder(dtype=tf.int32, shape=[None], name="action")  # label
+        self.Q = tf.placeholder(dtype=tf.float32, shape=[None, 1], name="Q_value")
 
         # Instance: actor/critic/replay memory initialization
         actor = Actor(self.action_space, 'actor')
         critic = Critic('critic')
         self.memory = ReplayMemory()
 
-        self.act_prob_distribution = actor.get_pi_theta(self.observation)
-        cross_entropy = actor.get_cross_entropy(self.observation, self.action_label)
-        self.value = critic.get_value(self.observation)
+        # Actor network - calculate 1) logits of action weights and 2) cross entropy(loss of actor)
+        self.action_prob = actor.get_action_prob(observation=self.observation)
+        cross_entropy = actor.get_cross_entropy(observation=self.observation, label_action_weights=self.action_label)
+        # Critic network - calculate 1) value
+        self.value = critic.get_value(observation=self.observation)
+
+        # calculate the advantage
         self.advantage = self.Q - self.value
 
+        # loss of actor and critic
         actor_loss = tf.reduce_mean(cross_entropy * self.advantage)
         self.actor_train_optimizer = tf.train.AdamOptimizer(learning_rate=lr_actor).minimize(actor_loss)
-
         critic_loss = tf.reduce_mean(tf.square(self.advantage))
         self.critic_train_optimizer = tf.train.AdamOptimizer(learning_rate=lr_critic).minimize(critic_loss)
 
+        # agent's session
+        self.sess = tf.Session()
+        self.sess.run(tf.global_variables_initializer())
+
+    # Note that all episodic reward is not available not as REINFORCE. (because of TD manner)
     def compute_Q(self, last_value, done, reward):
         Q = np.zeros_like(reward)
         if done:
             value = 0
         else:
             value = last_value
+
         for t in reversed(range(0, len(reward))):
             value = value * self.gamma + reward[t]
             Q[t] = value
@@ -145,11 +159,12 @@ class AdvantageActorCritic:
 
     def step(self, observation): # observation : env.reset()
         if observation.ndim < 2: observation = observation[np.newaxis, :]
-        prob_weights = self.sess.run(self.act_prob_distribution, feed_dict={self.observation: observation})
-        action = np.random.choice(range(prob_weights.shape[1]), p=prob_weights.ravel()) # index?
+        action_prob = self.sess.run(self.action_prob, feed_dict={self.observation: observation}) ###
+        action = np.random.choice(range(action_prob.shape[1]), p=action_prob.ravel()) # value of weight selected from prob. distribution 'p'.
         value = self.sess.run(self.value, feed_dict={self.observation: observation})
         return action, value
 
+    # optimizer
     def learn(self, last_value, done):
         observation, action, reward = self.memory.convert2array()
         Q = self.compute_Q(last_value, done, reward)
@@ -164,7 +179,7 @@ env = gym.make('CartPole-v0')
 env.seed(1)
 env = env.unwrapped
 
-agent = AdvantageActorCritic(action_space=env.action_space.n, observation_space=env.observation_space.shape[0],
+agent = A2C_Agent(action_space=env.action_space.n, observation_space=env.observation_space.shape[0],
                              lr_actor=0.01, lr_critic=0.02, gamma=0.99)
 
 total_episode = 1000
