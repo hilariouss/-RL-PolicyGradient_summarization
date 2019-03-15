@@ -162,7 +162,7 @@ sample efficiency를 향상시킵니다.
 여기서 파란색으로 표시된 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_rho.png)는 target policy의 결과와 behaviour policy의 결과의 비율입니다 (ratio of the target policy to the behaviour policy). 즉, 두 policy간의 비율을 적용한 점과, stationary distribution이 behaviour policy를 따른다는 점이 이전에 살펴본 on-policy policy gradient 알고리즘과의 차이점이라고 할 수 있습니다.
 
 ## 3-4. A2C (Advantage Actor-Critic)
-TD 에러와 advantage, Bellman error의 차이는 아래 그림과 같습니다. ([참조]: (http://www.boris-belousov.net/2017/08/10/td-advantage-bellman/))
+TD 에러와 advantage, Bellman error의 차이는 아래 그림과 같습니다. ([참조](http://www.boris-belousov.net/2017/08/10/td-advantage-bellman/))
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-4.A2C/td_error_advantage_BE.png)
 
