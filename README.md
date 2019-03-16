@@ -180,7 +180,7 @@ A2C는 A3C의 *synchronous*하고 deterministic한 버전의 알고리즘입니�
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-4.A2C/a3c_a2c.png)
 
-## 3-6. DPG (Deterministic Policy Gradient)
+## 3-6. DPG (Deterministic Policy Gradient)([논문](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/6.%20DPG/DPG.pdf)|[코드]())
 ## 3-7. DDPG (Deep Deterministic Policy Gradient)
 ## 3-8. D4PG (Distributed Distributional DDPG)
 ## 3-9. MADDPG (Multi-agent DDPG)
