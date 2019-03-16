@@ -176,7 +176,10 @@ class Worker(object):
                 buffer_state.append(state)
                 buffer_action.append(action)
                 buffer_reward.append(reward)
-
+                # Each worker collects these info. until below condition is satisfied
+                # Whenever the condition is satisfied, the worker calculates value target with using the buffer_reward and
+                # update the global network with using its actor and critic gradient.
+                
                 # Update the global and assign to local net
                 if total_step % hparams.UPDATE_GLOBAL_ITER == 0 or done:
                     if done:
