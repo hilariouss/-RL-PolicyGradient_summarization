@@ -80,7 +80,7 @@ class ACNet(object):
                     self.critic_loss = tf.reduce_mean(tf.square(td_error))
 
                 with tf.name_scope("actor_loss"):
-                    log_pi_theta = tf.reduce_mean(tf.log(self.pi_theta + 1e+5) * tf.one_hot(self.action_history, n_action_space, dtype=tf.float32),
+                    log_pi_theta = tf.reduce_mean(tf.log(self.pi_theta + 1e-5) * tf.one_hot(self.action_history, n_action_space, dtype=tf.float32),
                                                                                             axis=1, keep_dims=True)
                     expected_value = log_pi_theta * tf.stop_gradient(td_error) #->expected_value에 음의부호넣어
                                                                                # actor의 loss로.
@@ -97,6 +97,7 @@ class ACNet(object):
                     # cross entropy H(p, q) = - sigma_x [ p(x)log(q(x)) ] (x는 확률변수, p는 label, q는 logits)
                     # 모델의 예측 확률분포 (q)와 실제 확률분포 (p)의 오차가 작을수록 교차 엔트로피 H의 값이 작아지므로
                     # 이를 minimize하도록 학습하면 예측 확률분포 q가 실제 확률분포 p와 유사하게(오차가 작아지게)학습된다.
+                    # pi_theta에 1e-5의 noise를 주어 exploration을 하도록 설정.
                     self.expected_value = hparams.ENTROPY_BETA * entropy + expected_value
                     self.actor_loss = tf.square(-self.expected_value)
 
