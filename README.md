@@ -161,12 +161,21 @@ sample efficiency를 향상시킵니다.
 
 여기서 파란색으로 표시된 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_rho.png)는 target policy의 결과와 behaviour policy의 결과의 비율입니다 (ratio of the target policy to the behaviour policy). 즉, 두 policy간의 비율을 적용한 점과, stationary distribution이 behaviour policy를 따른다는 점이 이전에 살펴본 on-policy policy gradient 알고리즘과의 차이점이라고 할 수 있습니다.
 
-## 3-4. A2C (Advantage Actor-Critic)
+## 3-4. A3C (Asynchronous Advantage Actor-Critic)([논문](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/5.%20A3C/A3C.pdf)|[코드](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/5.%20A3C/A3C.py))
+비동기적 어드밴티지 actor-critic(A3C)은 parallel training에 초점을 둔 policy gradient 알고리즘 입니다. 전역 actor-critic 망과 다수의 worker들이 존재하며, 다수의 worker들의 gradient 계산 결과를 각자 계산하여 전역망의 actor 및 critic의 gradient를 비동기적으로 업데이트 합니다. 
+
+일반적으로 paper에서 update를 위해 actor와 critic의 loss 계산을 위해서는 TD 에러를 활용하는데, advantage의 approximation으로 loss 값을 계산하는데 활용하고 있습니다. 세부적인 차이에 대한 이해를 위해 아래 정보를 추가합니다.
 TD 에러와 advantage, Bellman error의 차이는 아래 그림과 같습니다. ([참조](http://www.boris-belousov.net/2017/08/10/td-advantage-bellman/))
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-4.A2C/td_error_advantage_BE.png)
 
-## 3-5. A3C (Asynchronous Advantage Actor-Critic)
+즉, worker들은 각자 독립적으로 trajectory를 생성하며 전이에 대한 경험을 축적하고, 종료 조건에 도달할경우 TD 에러를 계산, loss에 대한 gradient를 계산합니다. 각 worker들은 각자의 환경에서 독립적으로 환경과 상호작용하기 때문에, 종료 조건에 동시에 도달하지 않을 수 있어 자연스럽게 loss에 대한 gradient를 계산하는 시점도 다를 수 있습니다. 따라서, global network에 업데이트 하는 시점도 제각각일 수 있습니다. 이러한 점이 바로 비동기적 학습인 A3C의 특징이라고 할 수 있습니다. 아래는 A3C의 알고리즘입니다.
+
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-5.A3C/a3c_algorithm.png)
+
+## 3-5. A2C (Advantage Actor-Critic)([논문]https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/4.%20A2C/A3C.pdf)|[코드](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/4.%20A2C/A2C_CartPole-v0.py))
+A2C는 A3C의 sy
+
 ## 3-6. DPG (Deterministic Policy Gradient)
 ## 3-7. DDPG (Deep Deterministic Policy Gradient)
 ## 3-8. D4PG (Distributed Distributional DDPG)
@@ -180,7 +189,7 @@ TD 에러와 advantage, Bellman error의 차이는 아래 그림과 같습니다
 
 # References
 
-*Todo (7/19)*
+*Todo (9/19)*
 - [x] 0. Preliminary
 - [x] 1. Value-based reinforcement learning
 - [x] 2. Introduction and goal of *Policy gradient*
@@ -188,8 +197,8 @@ TD 에러와 advantage, Bellman error의 차이는 아래 그림과 같습니다
   - [x] 3-1. REINFORCE
   - [x] 3-2. Actor-critic
   - [x] 3-3. Off-policy policy gradient
-  - [ ] 3-4. A2C
-  - [ ] 3-5. A3C
+  - [x] 3-4. A3C
+  - [x] 3-5. A2C
   - [ ] 3-6. DPG
   - [ ] 3-7. DDPG
   - [ ] 3-8. D4PG
