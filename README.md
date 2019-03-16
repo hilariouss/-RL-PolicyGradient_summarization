@@ -162,7 +162,7 @@ sample efficiency를 향상시킵니다.
 여기서 파란색으로 표시된 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-3.Off-policy_PG/offpolicy_pg_rho.png)는 target policy의 결과와 behaviour policy의 결과의 비율입니다 (ratio of the target policy to the behaviour policy). 즉, 두 policy간의 비율을 적용한 점과, stationary distribution이 behaviour policy를 따른다는 점이 이전에 살펴본 on-policy policy gradient 알고리즘과의 차이점이라고 할 수 있습니다.
 
 ## 3-4. A3C (Asynchronous Advantage Actor-Critic)([논문](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/5.%20A3C/A3C.pdf)|[코드](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/5.%20A3C/A3C.py))
-비동기적 어드밴티지 actor-critic(A3C)은 parallel training에 초점을 둔 policy gradient 알고리즘 입니다. 전역 actor-critic 망과 다수의 worker들이 존재하며, 다수의 worker들의 gradient 계산 결과를 각자 계산하여 전역망의 actor 및 critic의 gradient를 비동기적으로 업데이트 합니다. 
+비동기적 어드밴티지 actor-critic(A3C)은 parallel training에 초점을 둔 policy gradient 알고리즘 입니다. 전역 actor-critic 망과 다수의 worker들이 존재하며, 다수의 worker(=agent)들의 gradient 계산 결과를 각자 계산하여 전역망의 actor 및 critic의 gradient를 비동기적으로 업데이트 합니다. 
 
 일반적으로 paper에서 update를 위해 actor와 critic의 loss 계산을 위해서는 TD 에러를 활용하는데, advantage의 approximation으로 loss 값을 계산하는데 활용하고 있습니다. 세부적인 차이에 대한 이해를 위해 아래 정보를 추가합니다.
 TD 에러와 advantage, Bellman error의 차이는 아래 그림과 같습니다. ([참조](http://www.boris-belousov.net/2017/08/10/td-advantage-bellman/))
@@ -173,8 +173,12 @@ TD 에러와 advantage, Bellman error의 차이는 아래 그림과 같습니다
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-5.A3C/a3c_algorithm.png)
 
-## 3-5. A2C (Advantage Actor-Critic)([논문]https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/4.%20A2C/A3C.pdf)|[코드](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/4.%20A2C/A2C_CartPole-v0.py))
-A2C는 A3C의 sy
+## 3-5. A2C (Advantage Actor-Critic)([논문](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/4.%20A2C/A3C.pdf)|[코드](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/4.%20A2C/A2C_CartPole-v0.py))
+A2C는 A3C의 synchronous하고 deterministic한 버전의 알고리즘입니다. A3C에서 각 agent는 독립적으로 global network를 업데이트시켰습니다. 이 때, 각 worker는 다른 worker의 학습중인 parameter가 반영된 global network의 parameter를 활용해 비동기적인 학습을 하였다고 했습니다. 다른 worker로부터 영향을 받은 parameter는 optimal이 아닐 수 있기 때문에, 이러한 parameter로 업데이트하는 방식인 A3C의 worker들은 학습의 inconsistency를 어쩔 수 없이 경험할 수 밖에 없었습니다. 
+
+이러한 개별 worker 학습의 inconsistency 문제를 해결하기 위해서, A2C의 coordinator는 global parameter를 업데이트 하기 전에 모든 worker의 actor들이 global 업데이트 주기 혹은 종료조건(done)에 도달할 때 까지 기다린 후, 다음 episode에서 동일 policy로 각 worker의 actor가 행동합니다. 이러한 동기화된 gradient update는 학습과정을 더욱 응집화하고 빠른 수렴에 도달할 수 있도록 합니다. 아래는 A3C와 A2C의 비교 그림입니다.
+
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-4.A2C/a3c_a2c.png)
 
 ## 3-6. DPG (Deterministic Policy Gradient)
 ## 3-7. DDPG (Deep Deterministic Policy Gradient)
