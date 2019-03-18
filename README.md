@@ -169,7 +169,7 @@ TD 에러와 advantage, Bellman error의 차이는 아래 그림과 같습니다
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-4.A2C/td_error_advantage_BE.png)
 
-즉, worker들은 각자 독립적으로 trajectory를 생성하며 전이에 대한 경험을 축적하고, 전역망 갱신 조건(done or update주기)에 도달할경우 TD 에러를 계산, loss에 대한 gradient를 계산합니다. 각 worker들은 각자의 환경에서 독립적으로 환경과 상호작용하기 때문에, 종료 조건에 동시에 도달하지 않을 수 있어 자연스럽게 loss에 대한 gradient를 계산하는 시점도 다를 수 있습니다. 따라서, global network에 업데이트 하는 시점도 제각각일 수 있습니다. 이러한 점이 바로 비동기적 학습인 A3C의 특징이라고 할 수 있습니다. 아래는 A3C의 알고리즘입니다.
+즉, worker들은 각자 독립적으로 trajectory를 생성하며 전이에 대한 경험을 축적하고, 전역망 갱신 조건(done or update주기)에 도달할경우 TD 에러를 계산, loss에 대한 gradient를 계산합니다. **각 worker들은 각자의 환경에서 독립적으로 환경과 상호작용하기 때문에, 종료 조건에 동시에 도달하지 않을 수 있어 자연스럽게 loss에 대한 gradient를 계산하는 시점도 다를 수 있습니다. 따라서, global network에 업데이트 하는 시점도 제각각일 수 있습니다. 이러한 점이 바로 비동기적 학습인 A3C의 특징이라고 할 수 있습니다.** 아래는 A3C의 알고리즘입니다.
 
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-5.A3C/a3c_algorithm.png)
 
