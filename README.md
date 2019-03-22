@@ -181,6 +181,13 @@ A2C는 A3C의 *synchronous*하고 deterministic한 버전의 알고리즘입니�
 ![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/Equation_img/3-4.A2C/a3c_a2c.png)
 
 ## 3-6. DPG (Deterministic Policy Gradient)([논문](https://github.com/hilariouss/-RL-PolicyGradient_summarization/blob/master/6.%20DPG/DPG.pdf)|[코드]())
+지금까지 살펴본 policy gradient 알고리즘들은 모두 stochastic policy, 즉, 어떤 상태에 대해 행동별 수행할 확률을 정의한 정책이었습니다. 쉬운 예제로 grid world에 agent가 있다고 가정해봅시다. 이러한 경우, stochastic policy를 따르는 agent는 환경을 observe하면 time step *t*에서 취할 수 있는 행동 a<sub>t</sub> ∈ *A* 들 각각에 대해 그 행동을 취할 확률을 output 했습니다. 그리고 그 확률에 따라 각 행동들을 선택해 행동했습니다. **즉, stochastic policy에서 정책 π<sub>θ</sub>(.|*s*)는 각 행동들을 선택할 probability distribution 이었습니다.**
+
+하지만, 이번 소 단원에서 소개할 알고리즘 *Deterministic policy gradient algorithm*은 이름에서도 알 수 있듯이, 확률적인 행동 선택이 아닌, 결정론적 행동 선택을 하는 알고리즘 입니다. 이전에 살펴본 stochastic policy의 표기법 π<sub>θ</sub>(.|*s*)과 구분하기 위해 deterministic policy의 표기는 **μ<sub>θ</sub>(*s*)** 라고 하겠습니다. 어떤 상태에서 한 행동을 하도록 정책 자체가 구성되어있기 때문에, *a* = μ<sub>θ</sub>(*s*)라고 표기할 수 있고, stochastic policy π<sub>θ</sub>(.|*s*)에서 조건부 확률 notation이 빠지고 상태 *s*만 남아있는 것을 확인할 수 있습니다.
+
+아래복사, 이름
+![Alt Text](https://github.com/hilariouss/-RL-PolicyGradient_summarization/tree/master/Equation_img/3-6.DPG/)
+
 ## 3-7. DDPG (Deep Deterministic Policy Gradient)
 ## 3-8. D4PG (Distributed Distributional DDPG)
 ## 3-9. MADDPG (Multi-agent DDPG)
