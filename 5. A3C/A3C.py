@@ -200,7 +200,7 @@ class Worker(object):
                                                              self.AC.value_target: buffer_v_target})
 
                     buffer_state, buffer_action, buffer_reward = [], [], []
-                    self.AC.pull_global()
+                    self.AC.pull_global() # update the local net with global net.
 
                 state = state_
                 total_step += 1
